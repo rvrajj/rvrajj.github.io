@@ -30,14 +30,6 @@ var routes = [
                 <li><a href="/blog/cazri/" class="panel-close" data-view=".view-main">CAZRI</a></li>
               </ul>
               
-              <div class="block-title">Food</div>
-            <div class="list links-list">
-              <ul>
-                <li><a href="/blog/kachori" class="panel-close" data-view=".view-main">Kachori</a></li>
-                <li><a href="/blog/kachori" class="panel-close" data-view=".view-main">Mirchiwada</a></li>
-                
-              </ul>
-              
         </div>
     `,
   },
