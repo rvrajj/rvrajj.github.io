@@ -6,58 +6,12 @@ var routes = [
     name: 'home',
   },
   {
-    path: '/blog/',
-    content: `
-      <div class="page">
-          <div class="navbar">
-            <div class="navbar-bg"></div>
-            <div class="navbar-inner sliding">
-            <div class="left">
-              <a class="link back">
-                <i class="icon icon-back"></i>
-                <span class="if-not-md">Jodhana.IN</span>
-              </a>
-            </div>
-              <div class="title">Blogs</div>
-            </div>
-          </div>
-          <div class="page-content">
-            <div class="block-title">Travel</div>
-            <div class="list links-list">
-              <ul>
-                <li><a href="/blog/mehrangarh-fort/" class="panel-close" data-view=".view-main">Mehrangarh Fort</a></li>
-                <li><a href="/blog/afri/" class="panel-close" data-view=".view-main">AFRI</a></li>
-                <li><a href="/blog/cazri/" class="panel-close" data-view=".view-main">CAZRI</a></li>
-              </ul>
-              
-        </div>
-    `,
+    path: '/gallery/',
+    url: './nav/gallery.html',
   },
   {
-    path: '/events/',
-    content: `
-      <div class="page">
-          <div class="navbar">
-            <div class="navbar-bg"></div>
-            <div class="navbar-inner sliding">
-            <div class="left">
-              <a class="link back">
-                <i class="icon icon-back"></i>
-                <span class="if-not-md">Jodhana.IN</span>
-              </a>
-            </div>
-              <div class="title">Events</div>
-            </div>
-          </div>
-          <div class="page-content">
-            <div class="list links-list">
-              <ul>
-                
-              </ul>
-            </div>
-          </div>
-        </div>
-    `,
+    path: '/calendar/',
+    componentUrl: './nav/calendar.html',
   },
   {
     path: '/products/',
