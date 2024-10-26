@@ -19,7 +19,7 @@
 <body>
   <div id="app">
     <div class="panel panel-left panel-floating panel-resizable panel-init">
-      <div class=" view view-init view-right" data-name="right" data-url="/">
+      <div class="view view-init view-left" data-name="left" data-url="/">
         <div class="page">
           <div class="navbar">
             <div class="navbar-bg"></div>
@@ -31,7 +31,6 @@
             <div class="list links-list">
               <ul>
                 <li><a href="/blog/">Blogs</a></li>
-                <li><a href="/events/">Events</a></li>
                 <li><a href="/products/">Products</a></li>
                 
               </ul>
@@ -40,6 +39,8 @@
         </div>
       </div>
     </div>
+    <div class="panel panel-right panel-floating panel-resizable panel-init">
+      <div class="view view-right view-init safe-areas" data-master-detail-breakpoint="768" data-url="/calendar/"></div></div>
     <div class="view view-main view-init safe-areas" data-master-detail-breakpoint="768" data-url="/"></div>
   </div>
   <script src="js/f7-bundle.min.js"></script>
