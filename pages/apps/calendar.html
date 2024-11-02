@@ -1,0 +1,426 @@
+<template>
+  <div class="page">
+    <div class="navbar no-shadow">
+      <div class="navbar-bg"></div>
+      <div class="navbar-inner sliding">
+        <div class="left">
+        <a class="link back">
+          <i class="icon icon-back"></i>
+          <span class="if-not-md">Jodhana.IN</span>
+        </a>
+      </div>
+        <div class="title">Calendar</div>
+        <div class="right">
+          <a class="link tooltip-init" @click=${goToday} data-tooltip="Today">
+            <i class="icon f7-icons">calendar_today</i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="fab-backdrop"></div>
+    <div class="fab fab-right-bottom">
+    <a>
+      <i class="icon f7-icons if-not-md">plus</i>
+      <i class="icon f7-icons if-not-md">xmark</i>
+      <i class="icon material-icons md-only">add</i>
+      <i class="icon material-icons md-only">close</i>
+    </a>
+    <div class="fab-buttons fab-buttons-top">
+      <a href="" class="fab-label-button">
+        <span>1</span>
+        <span class="fab-label">Action 1</span>
+      </a>
+      <a href="" class="fab-label-button">
+        <span>2</span>
+        <span class="fab-label">Action 2</span>
+      </a>
+      <a href="" class="fab-label-button">
+        <span>3</span>
+        <span class="fab-label">Third Action</span>
+      </a>
+    </div>
+  </div>
+    <div class="page-content">
+      <div id="calendar" class="block block-strong no-padding no-margin no-hairline-top"></div>
+      <div id="calendar-events" class="list no-margin no-hairlines no-safe-area-left">
+        <ul>
+          
+          ${eventItems.length === 0 && $h`
+          <li class="item-content">
+            <div class="item-inner">
+              <div class="item-title text-color-gray">No events for this day</div>
+            </div>
+          </li>
+          `}
+          
+          
+          ${eventItems.length > 0 && eventItems.map((item) => $h`
+          <li class="item-content" @click="${() => showEvent(item)}">
+            <div class="event-color" style="background-color: ${item.color}"></div>
+            <div class="item-inner">
+              <div class="item-title">${item.title}</div>
+              ${item.time && $h`
+              <!--div class="item-after">${item.time}</div-->
+              `}
+            </div>
+          </li>
+          `)}
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="sheet-modal event-sheet" style="height:auto">
+      <div class="sheet-modal-inner">
+        <div class="swipe-handler"></div>
+        <div class="page-content">
+          <div class="block-title block-title-large event-title"></div>
+          <div class="block">
+            <p class="date event-date"></p>
+            <div class="event-description">
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<style>
+  #calendar,
+  #calendar-events {
+    height: 50%;
+    box-sizing: border-box;
+  }
+
+  #calendar .calendar {
+    height: 100%;
+  }
+
+  #calendar-events ul {
+    height: 100%;
+    overflow: auto;
+  }
+
+  #calendar-events .event-color {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 8px;
+    height: 100%;
+  }
+
+  @media (orientation: landscape) {
+    #calendar {
+      float: left;
+    }
+
+    #calendar,
+    #calendar-events {
+      height: 100%;
+    }
+
+    #calendar,
+    #calendar-events {
+      width: 50%;
+    }
+
+    #calendar-events {
+      margin-left: 50% !important;
+      border-left: 1px solid #eee;
+    }
+
+    .dark #calendar-events {
+      border-left-color: #282828;
+    }
+  }
+</style>
+<script>
+  export default (props, { $f7, $, $el, $update, $on }) => {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const day = date.getDate();
+
+    let calendar;
+    let eventItems = [];
+    let eventSheet;
+    const today = new Date(year, month, day);
+    var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const events = [
+      {
+        date: new Date(2024, 9, 30),
+        hours: 0,
+        minutes: 0,
+        color: '#ff9800',
+        title: 'Dhanteras',
+        description: '<p>This day is regarded as the Jayanti (Birth Anniversary) of God Dhanvantari, the Physician of Gods, who came out during Samudra manthan, the churning of the great ocean by the gods and the demons.</p>',
+      },
+      {
+        date: new Date(2024, 9, 31),
+        hours: 0,
+        minutes: 0,
+        color: '#ff9800',
+        title: 'Narak Chaturdasi',
+        description: '<p>This festival is observed to commemorate the victory of Lord Krishna over the demon king, Narkasur.</p>',
+      },
+      {
+        date: new Date(2024, 9, 31),
+        hours: 0,
+        minutes: 0,
+        color: '#ff9800',
+        title: 'Deepavali',
+        description: '<p>Deepavali which means row of lights/lamps is called Diwali in North India, Deepa means lamp and in Hindi a lamp is mostly called a Diya or Di. The festival is celebrated for the return of Rama and Sita to the kingdom Ayodhya after fourteen years of exile.</p>',
+      },
+      {
+        date: new Date(2024, 10, 3),
+        hours: 0,
+        minutes: 0,
+        color: '#ff9800',
+        title: 'Bhai Dooj',
+        description: '<p>Bhaidooj, also referred to as Bhaubeej, is the ceremony performed by Hindus, generally, on the second day of Deepavali. It is celebrated among brothers and sisters and is similar to Raksha Bandhan, except there is no tying of rakhi involved.</p>',
+      },
+      {
+        date: new Date(2024, 10, 15),
+        hours: 0,
+        minutes: 0,
+        color: '#ff9800',
+        title: 'Kartik Purnima',
+        description: '<p>A unique festival is celebrated in Varanasi this day which is called Dev Devali. The Kartik Purnima festival also coincides with the Jain light festival and Guru Nanak Jayanti</p>',
+      },
+      {
+        date: new Date(2025, 1, 2),
+        hours: 0,
+        minutes: 0,
+        color: '#ff9800',
+        title: 'Vasant Panchami',
+        description: '<p>Vasant Panchami (also called Saraswati Puja by Bengalis and Biharis) is celebrated for the blessing of Saraswati,goddess of wisdom and the arts.</p>',
+      },
+      {
+        date: new Date(2025, 1, 26),
+        hours: 0,
+        minutes: 0,
+        color: '#ff9800',
+        title: 'Maha Shivratri',
+        description: '<p>Followers of Shiva observe religious fasting and the offering of Bael (Bilva) leaves to the Shiva.</p>',
+      },
+      {
+        date: new Date(2025, 2, 14),
+        hours: 0,
+        minutes: 0,
+        color: '#ff9800',
+        title: 'Holi',
+        description: '<p>Holi or Phagwah is a popular spring festival. Holi commemorates the slaying of the demoness Holika by Lord Vishnus devotee Prahlad.</p>',
+      },
+      {
+        date: new Date(2025, 2, 30),
+        hours: 0,
+        minutes: 0,
+        color: '#ff9800',
+        title: 'Gudi Padwa',
+        description: '<p>Gudi Padwa is celebrated on the first day of the Chaitra month, and is celebrated as New Years Day by Marathis and the Konkanis. According to the Brahma Purana, this is the day on which Brahma created the world. Ugadi (meaning the start of an era in Telugu and Kannada) is the New Years Day for the Kannadigas and Telugus.</p>',
+      },
+      {
+        date: new Date(2025, 3, 6),
+        hours: 0,
+        minutes: 0,
+        color: '#ff9800',
+        title: 'Rama Navami',
+        description: '<p>Rama Navami is the celebration of the birth of Rama.</p>',
+      },
+      {
+        date: new Date(2025, 3, 10),
+        hours: 0,
+        minutes: 0,
+        color: '#ff9800',
+        title: 'Mahavir Jayanti',
+        description: '<p>In Jainism, Mahavir Jayanti, also known as Mahavir Janma Kalyanak, is the most important religious holiday. It celebrates the birth of Mahavira, the last Tirthankara.</p>',
+      },
+      {
+        date: new Date(2025, 3, 12),
+        hours: 0,
+        minutes: 0,
+        color: '#ff9800',
+        title: 'Hanumana Jayanti',
+        description: '<p>Hanuman Jayanti is celebrated to commemorate the birth of Hanuman.</p>',
+      },
+      
+      {
+        date: new Date(2025, 3, 30),
+        hours: 0,
+        minutes: 0,
+        color: '#ff9800',
+        title: 'Akshaya Tritiya (Akha Teej)',
+        description: '<p>It is an auspicious day of the birthday of Lord Parasurama who is the sixth incarnation of Lord Vishnu. On this day Veda Vyas and Lord Ganesha began to write Mahabharata.</p>',
+      },
+      
+      {
+        date: new Date(2025, 4, 12),
+        hours: 0,
+        minutes: 0,
+        color: '#ff9800',
+        title: 'Budhdha Purnima',
+        description: '<p>Buddha Purnima commemorates the birth anniversary of Lord Buddha, founder of Buddhism.</p>',
+      },
+      {
+        date: new Date(2025, 5, 11),
+        hours: 0,
+        minutes: 0,
+        color: '#ff9800',
+        title: 'Vat Purnima',
+        description: '<p>Vat Purnima is observed in Maharashtra. Women pray for the prosperity of their husbands by tying threads around a banyan tree.</p>',
+      },
+      {
+        date: new Date(2025, 6, 10),
+        hours: 0,
+        minutes: 0,
+        color: '#ff9800',
+        title: 'Guru Purnima',
+        description: '<p>Guru Purnima is the day devotees offer puja (worship) to their Guru. This was also the day when Vyasa, author of the Mahabharata was born.</p>',
+      },
+      {
+        date: new Date(2025, 7, 9),
+        hours: 0,
+        minutes: 0,
+        color: '#ff9800',
+        title: 'Raksha Bandhan',
+        description: '<p>Raksha Bandhan is a festival celebrated mainly in northern Indian states. Rakhi is a special occasion to celebrate the chaste bond of love between a brother and a sister.</p>',
+      },
+      {
+        date: new Date(2025, 7, 16),
+        hours: 0,
+        minutes: 0,
+        color: '#ff9800',
+        title: 'Krishna Janmaashtami',
+        description: '<p>Krishna Janmaashtami is the Hindu festival celebrating the birth of Krishna.</p>',
+      },
+      {
+        date: new Date(2025, 7, 27),
+        hours: 0,
+        minutes: 0,
+        color: '#ff9800',
+        title: 'Ganesh Chaturthi',
+        description: '<p>Ganesh Chaturthi is the celebration of the birth of Ganesh.</p>',
+      },
+      {
+        date: new Date(2025, 9, 1),
+        hours: 0,
+        minutes: 0,
+        color: '#ff9800',
+        title: 'Mahanavami',
+        description: '<p>Navarathri is the Hindu festival of worship and dance. In Sanskrit the term literally means nine nights. During this festival the forms of Shakti are worshiped.</p>',
+      },
+      {
+        date: new Date(2025, 9, 2),
+        hours: 0,
+        minutes: 0,
+        color: '#ff9800',
+        title: 'Vijayadashami',
+        description: '<p>Vijayadashami is the Hindu celebration of good over evil.</p>',
+      },
+    ];
+
+    const renderEvents = (calendar) => {
+      var currentDate = calendar.value[0];
+      var currentEvents = events
+        .filter(function (event) {
+          return (
+            event.date.getTime() >= currentDate.getTime() &&
+            event.date.getTime() < currentDate.getTime() + 24 * 60 * 60 * 1000
+          );
+        });
+
+      eventItems = [];
+      if (currentEvents.length) {
+        currentEvents.forEach(function (event) {
+          const hours = event.hours;
+          let minutes = event.minutes;
+          if (minutes < 10) minutes = `0${minutes}`;
+          eventItems.push({
+            title: event.title,
+            time: `${hours}:${minutes}`,
+            description: event.description,
+            color: event.color,
+          });
+        });
+      }
+      $update();
+    }
+
+    $on('pageInit', () => {
+      calendar = $f7.calendar.create({
+        containerEl: '#calendar',
+        //toolbar: false,
+        value: [today],
+        renderToolbar: function () {
+          return '<div class="toolbar calendar-custom-toolbar no-shadow">' +
+            '<div class="toolbar-inner">' +
+            '<div class="left">' +
+            '<a  class="link icon-only"><i class="icon icon-back"></i></a>' +
+            '</div>' +
+            '<div class="center"></div>' +
+            '<div class="right">' +
+            '<a  class="link icon-only"><i class="icon icon-forward"></i></a>' +
+            '</div>' +
+            '</div>' +
+            '</div>';
+        },
+        events: events,
+        on: {
+          init: function (calendar) {
+            //$('.navbar-calendar-title').text(monthNames[calendar.currentMonth] + ', ' + calendar.currentYear);
+            //$f7.navbar.size($f7.navbar.getElByPage($el.value));
+            calendar.$el.addClass('no-safe-area-right');
+            renderEvents(calendar);
+            
+            $('.calendar-custom-toolbar .center').text(monthNames[calendar.currentMonth] + ', ' + calendar.currentYear);
+            $('.calendar-custom-toolbar .left .link').on('click', function () {
+              calendar.prevMonth();
+            });
+            $('.calendar-custom-toolbar .right .link').on('click', function () {
+              calendar.nextMonth();
+            });
+          },
+          monthYearChangeStart: function (calendar) {
+            //$('.navbar-calendar-title').text(monthNames[calendar.currentMonth] + ', ' + calendar.currentYear);
+            //$f7.navbar.size($f7.navbar.getElByPage($el.value));
+            
+            $('.calendar-custom-toolbar .center').text(monthNames[calendar.currentMonth] + ', ' + calendar.currentYear);
+          },
+          change: function (calendar) {
+            renderEvents(calendar);
+          },
+        }
+      });
+      
+      eventSheet = $f7.sheet.create({
+        el: '.event-sheet',
+        swipeToClose: true,
+        push: true,
+        backdrop: true,
+      });
+    })
+    
+    const goToday = () => {
+      calendar.setValue([today]);
+      if(!(calendar.currentYear == year && calendar.currentMonth == month))
+      calendar.setYearMonth(year, month, 100)
+    };
+    
+    const showEvent = (event) => {
+      console.log(calendar);
+      $('.event-title').text(event.title);
+      $('.event-date').text(calendar.value[0].getDate() + ' ' + monthNames[calendar.currentMonth] + ', ' + calendar.currentYear);
+      $('.event-description').html(event.description);
+      eventSheet.open();
+    };
+
+    $on('pageBeforeRemove', () => {
+      if (eventSheet) eventSheet.destroy();
+      calendar.destroy();
+
+    })
+
+    return $render;
+  };
+</script>

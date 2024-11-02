@@ -1,0 +1,189 @@
+<template>
+  <div class="page">
+    <div class="navbar navbar-large navbar-transparent">
+      <div class="navbar-bg"></div>
+      <div class="navbar-inner sliding">
+        <div class="left">
+          <a class="link back">
+            <i class="icon icon-back"></i>
+            <span class="if-not-md">Jodhana.IN</span>
+          </a>
+        </div>
+        <div class="title">
+          Gallery
+        </div>
+        <div class="right">
+          <a class="link icon-only popover-open" data-popover=".popover-menu">
+            <i class="icon f7-icons if-not-md">ellipsis</i>
+            <i class="icon material-icons md-only">more_vert</i>
+          </a>
+          <div class="popover popover-menu" style="width: 120px">
+            <div class="popover-angle"></div>
+            <div class="popover-inner">
+              <div class="list">
+                <ul>
+                  <li><a class="list-button popover-close">Test</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="title-large">
+          <div class="title-large-text">
+            Gallery
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-content">
+      
+      
+      <div class="block-title text-color-red">
+        Remarkable Places in Jodhpur
+      </div>
+      
+      <div class="block featured-apps">
+        <div class="featured-app">
+          <a @click="${() => openAlbum('mehrangarh-fort')}">
+            <div class="featured-app-headline">Historical Landmark</div>
+            <div class="featured-app-title">Mehrangarh Fort</div>
+            <div class="featured-app-subtitle">One of the Largest Forts in Rajasthan</div>
+            <img loading="lazy" class="featured-app-image" alt="Mehrangarh Fort" src="/images/mehrangarh-fort.jpg" />
+          </a>
+        </div>
+        <div class="featured-app">
+          <a @click="${() => openAlbum('mehrangarh-fort')}">
+            <div class="featured-app-headline">Clock Tower</div>
+            <div class="featured-app-title">Ghanta Ghar</div>
+            <div class="featured-app-subtitle">Built by Maharaja Sardar Singh</div>
+            <img loading="lazy" class="featured-app-image" alt="Ghanta Ghar" src="/images/ghantaghar.jpg" />
+          </a>
+        </div>
+        <div class="featured-app">
+          <a @click="${() => openAlbum('toorjikajhalra')}">
+            <div class="featured-app-headline">Ancient StepWell</div>
+            <div class="featured-app-title">Toorji Ka Jhalra</div>
+            <div class="featured-app-subtitle">Built in 1740 by Maharani Toorji</div>
+            <img loading="lazy" class="featured-app-image" alt="Toorji Ka Jhalra" src="/images/toorjikajhalra.jpg" />
+          </a>
+        </div>
+        <div class="featured-app">
+          <a @click="${() => openAlbum('jaswant-thada')}">
+            <div class="featured-app-headline">Memorial House</div>
+            <div class="featured-app-title">Jaswant Thada</div>
+            <div class="featured-app-subtitle">The Taj Mahal of Rajasthan</div>
+            <img loading="lazy" class="featured-app-image" alt="Jaswant Thada" src="/images/jaswant-thada.jpg" />
+          </a>
+        </div>
+      </div>
+      
+      
+      <div class="block-title text-color-red">
+        Temples of Jodhpur
+      </div>
+      
+      <div class="block featured-apps">
+        
+        <div class="featured-app">
+          <a @click="${() => openAlbum('jaswant-thada')}">
+            <div class="featured-app-headline">Guardian Deity of the Royal Family</div>
+            <div class="featured-app-title">Shree Chamunda Mataji Temple</div>
+            <div class="featured-app-subtitle">Built in the 15th Century by Rao Jodha</div>
+            <img loading="lazy" class="featured-app-image" alt="Jaswant Thada" src="/images/chamunda-mataji-mandir.webp" />
+          </a>
+        </div>
+      </div>
+      
+      
+      <div class="block-title text-color-red">
+        Public Parks in Jodhpur
+      </div>
+      
+      <div class="block featured-apps">
+        
+        <div class="featured-app">
+          <a @click="${() => openAlbum('jaswant-thada')}">
+            <div class="featured-app-headline">Rich Variety of Wildlife</div>
+            <div class="featured-app-title">Machia Safari Park</div>
+            <div class="featured-app-subtitle">Lion, Tiger, Bear, Crocodile & Ostrich</div>
+            <img loading="lazy" class="featured-app-image" alt="machia" src="/images/machia.jpg" />
+          </a>
+        </div>
+      </div>
+      
+      
+      <div class="block-title text-color-red">
+        Institutes in Jodhpur
+      </div>
+      
+      <div class="block featured-apps">
+        <div class="featured-app">
+          <a @click="${() => openAlbum('afri')}">
+            <div class="featured-app-headline">AFRI</div>
+            <div class="featured-app-title">Arid Forest Research Institute</div>
+            <div class="featured-app-subtitle">Biodiversity Conservation</div>
+            <img loading="lazy" class="featured-app-image" alt="AFRI" src="/images/afri.jpg" />
+          </a>
+        </div>
+        <div class="featured-app">
+          <a @click="${() => openAlbum('cazri')}">
+            <div class="featured-app-headline">CAZRI</div>
+            <div class="featured-app-title">Central Arid Zone Research Institute</div>
+            <div class="featured-app-subtitle">Farming in Arid Regions of India</div>
+            <img loading="lazy" class="featured-app-image" alt="CAZRI" src="/images/cazri.jpg" />
+          </a>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</template>
+<script>
+  export default (props, { $f7, $on }) => {
+    const photos = {'mehrangarh-fort':
+    [
+      {"url":"images/mehrangarh/20241011_093808.jpg","caption":"20241011_093808.jpg ugiujj hbuvuv6g uguvuvug ugiujj hbuvuv6g uguvuvug ugiujj hbuvuv6g uguvuvug ugiujj hbuvuv6g uguvuvug ugiujj hbuvuv6g uguvuvug ugiujj hbuvuv6g uguvuvug ugiujj hbuvuv6g uguvuvug"},{"url":"images/mehrangarh/20241011_093816.jpg","caption":"20241011_093816.jpg"},{"url":"images/mehrangarh/20241011_093848.jpg","caption":"20241011_093848.jpg"},{"url":"images/mehrangarh/20241011_102714.jpg","caption":"20241011_102714.jpg"},{"url":"images/mehrangarh/20241011_102815.jpg","caption":"20241011_102815.jpg"},{"url":"images/mehrangarh/20241011_102822.jpg","caption":"20241011_102822.jpg"},{"url":"images/mehrangarh/20241011_102847.jpg","caption":"20241011_102847.jpg"},{"url":"images/mehrangarh/20241011_102947.jpg","caption":"20241011_102947.jpg"},{"url":"images/mehrangarh/20241011_103042.jpg","caption":"20241011_103042.jpg"},{"url":"images/mehrangarh/20241011_103126.jpg","caption":"20241011_103126.jpg"},{"url":"images/mehrangarh/20241011_103143.jpg","caption":"20241011_103143.jpg"},{"url":"images/mehrangarh/20241011_103201.jpg","caption":"20241011_103201.jpg"},{"url":"images/mehrangarh/20241011_103521.jpg","caption":"20241011_103521.jpg"},{"url":"images/mehrangarh/20241011_103547.jpg","caption":"20241011_103547.jpg"},{"url":"images/mehrangarh/20241011_103618.jpg","caption":"20241011_103618.jpg"},{"url":"images/mehrangarh/20241011_103657.jpg","caption":"20241011_103657.jpg"},{"url":"images/mehrangarh/20241011_103734.jpg","caption":"20241011_103734.jpg"},{"url":"images/mehrangarh/20241011_103759.jpg","caption":"20241011_103759.jpg"},{"url":"images/mehrangarh/20241011_103851.jpg","caption":"20241011_103851.jpg"},{"url":"images/mehrangarh/20241011_105652.jpg","caption":"20241011_105652.jpg"},{"url":"images/mehrangarh/20241011_105700.jpg","caption":"20241011_105700.jpg"},{"url":"images/mehrangarh/20241011_105745.mp4","caption":"20241011_105745.mp4"},{"url":"images/mehrangarh/20241011_105903.jpg","caption":"20241011_105903.jpg"},{"url":"images/mehrangarh/20241011_105910.jpg","caption":"20241011_105910.jpg"},{"url":"images/mehrangarh/20241011_110034.jpg","caption":"20241011_110034.jpg"},{"url":"images/mehrangarh/20241011_110051.jpg","caption":"20241011_110051.jpg"},{"url":"images/mehrangarh/20241011_113207.jpg","caption":"20241011_113207.jpg"},{"url":"images/mehrangarh/20241011_113304.jpg","caption":"20241011_113304.jpg"},{"url":"images/mehrangarh/20241011_114225.jpg","caption":"20241011_114225.jpg"},{"url":"images/mehrangarh/20241011_114336.jpg","caption":"20241011_114336.jpg"},{"url":"images/mehrangarh/20241011_114353.jpg","caption":"20241011_114353.jpg"},{"url":"images/mehrangarh/20241011_114406.jpg","caption":"20241011_114406.jpg"},{"url":"images/mehrangarh/20241011_114455.jpg","caption":"20241011_114455.jpg"},{"url":"images/mehrangarh/20241011_114619.jpg","caption":"20241011_114619.jpg"},{"url":"images/mehrangarh/20241011_114625.jpg","caption":"20241011_114625.jpg"},{"url":"images/mehrangarh/20241011_114636.jpg","caption":"20241011_114636.jpg"},{"url":"images/mehrangarh/20241011_114640.jpg","caption":"20241011_114640.jpg"},{"url":"images/mehrangarh/20241011_114744.jpg","caption":"20241011_114744.jpg"},{"url":"images/mehrangarh/20241011_114749.jpg","caption":"20241011_114749.jpg"},{"url":"images/mehrangarh/20241011_114835.jpg","caption":"20241011_114835.jpg"},{"url":"images/mehrangarh/20241011_115114.jpg","caption":"20241011_115114.jpg"},{"url":"images/mehrangarh/20241011_121149.jpg","caption":"20241011_121149.jpg"},{"url":"images/mehrangarh/20241011_121618.jpg","caption":"20241011_121618.jpg"},{"url":"images/mehrangarh/20241011_121654.jpg","caption":"20241011_121654.jpg"},{"url":"images/mehrangarh/20241011_122334.jpg","caption":"20241011_122334.jpg"},{"url":"images/mehrangarh/20241011_122423.jpg","caption":"20241011_122423.jpg"},{"url":"images/mehrangarh/20241011_122454.jpg","caption":"20241011_122454.jpg"},{"url":"images/mehrangarh/20241011_122532.jpg","caption":"20241011_122532.jpg"},{"url":"images/mehrangarh/20241011_122918.jpg","caption":"20241011_122918.jpg"},{"url":"images/mehrangarh/20241011_122923.jpg","caption":"20241011_122923.jpg"},{"url":"images/mehrangarh/20241011_122929.jpg","caption":"20241011_122929.jpg"},{"url":"images/mehrangarh/20241011_123002.jpg","caption":"20241011_123002.jpg"},{"url":"images/mehrangarh/20241011_123106.jpg","caption":"20241011_123106.jpg"},{"url":"images/mehrangarh/20241011_123337.jpg","caption":"20241011_123337.jpg"},{"url":"images/mehrangarh/20241011_123343.jpg","caption":"20241011_123343.jpg"},{"url":"images/mehrangarh/20241011_123437.jpg","caption":"20241011_123437.jpg"},{"url":"images/mehrangarh/20241011_124502.jpg","caption":"20241011_124502.jpg"},{"url":"images/mehrangarh/20241011_124608.jpg","caption":"20241011_124608.jpg"},{"url":"images/mehrangarh/20241011_124730.jpg","caption":"20241011_124730.jpg"},{"url":"images/mehrangarh/20241011_124746.jpg","caption":"20241011_124746.jpg"},{"url":"images/mehrangarh/20241011_125053.jpg","caption":"20241011_125053.jpg"},{"url":"images/mehrangarh/20241011_125056.jpg","caption":"20241011_125056.jpg"},{"url":"images/mehrangarh/20241011_125912.jpg","caption":"20241011_125912.jpg"},{"url":"images/mehrangarh/20241011_132830.jpg","caption":"20241011_132830.jpg"},{"url":"images/mehrangarh/20241011_132832.jpg","caption":"20241011_132832.jpg"},{"url":"images/mehrangarh/20241011_132841.jpg","caption":"20241011_132841.jpg"},{"url":"images/mehrangarh/20241011_132849.jpg","caption":"20241011_132849.jpg"}],
+      'toorjikajhalra': [],
+      'jaswant-thada': [],
+      'afri': [],
+      'cazri': []
+    };
+    const thumbs = {'mehrangarh-fort': 
+    [
+      "images/mehrangarh/20241011_093808.jpg","images/mehrangarh/20241011_093816.jpg","images/mehrangarh/20241011_093848.jpg","images/mehrangarh/20241011_102714.jpg","images/mehrangarh/20241011_102815.jpg","images/mehrangarh/20241011_102822.jpg","images/mehrangarh/20241011_102847.jpg","images/mehrangarh/20241011_102947.jpg","images/mehrangarh/20241011_103042.jpg","images/mehrangarh/20241011_103126.jpg","images/mehrangarh/20241011_103143.jpg","images/mehrangarh/20241011_103201.jpg","images/mehrangarh/20241011_103521.jpg","images/mehrangarh/20241011_103547.jpg","images/mehrangarh/20241011_103618.jpg","images/mehrangarh/20241011_103657.jpg","images/mehrangarh/20241011_103734.jpg","images/mehrangarh/20241011_103759.jpg","images/mehrangarh/20241011_103851.jpg","images/mehrangarh/20241011_105652.jpg","images/mehrangarh/20241011_105700.jpg","images/mehrangarh/20241011_105745.mp4","images/mehrangarh/20241011_105903.jpg","images/mehrangarh/20241011_105910.jpg","images/mehrangarh/20241011_110034.jpg","images/mehrangarh/20241011_110051.jpg","images/mehrangarh/20241011_113207.jpg","images/mehrangarh/20241011_113304.jpg","images/mehrangarh/20241011_114225.jpg","images/mehrangarh/20241011_114336.jpg","images/mehrangarh/20241011_114353.jpg","images/mehrangarh/20241011_114406.jpg","images/mehrangarh/20241011_114455.jpg","images/mehrangarh/20241011_114619.jpg","images/mehrangarh/20241011_114625.jpg","images/mehrangarh/20241011_114636.jpg","images/mehrangarh/20241011_114640.jpg","images/mehrangarh/20241011_114744.jpg","images/mehrangarh/20241011_114749.jpg","images/mehrangarh/20241011_114835.jpg","images/mehrangarh/20241011_115114.jpg","images/mehrangarh/20241011_121149.jpg","images/mehrangarh/20241011_121618.jpg","images/mehrangarh/20241011_121654.jpg","images/mehrangarh/20241011_122334.jpg","images/mehrangarh/20241011_122423.jpg","images/mehrangarh/20241011_122454.jpg","images/mehrangarh/20241011_122532.jpg","images/mehrangarh/20241011_122918.jpg","images/mehrangarh/20241011_122923.jpg","images/mehrangarh/20241011_122929.jpg","images/mehrangarh/20241011_123002.jpg","images/mehrangarh/20241011_123106.jpg","images/mehrangarh/20241011_123337.jpg","images/mehrangarh/20241011_123343.jpg","images/mehrangarh/20241011_123437.jpg","images/mehrangarh/20241011_124502.jpg","images/mehrangarh/20241011_124608.jpg","images/mehrangarh/20241011_124730.jpg","images/mehrangarh/20241011_124746.jpg","images/mehrangarh/20241011_125053.jpg","images/mehrangarh/20241011_125056.jpg","images/mehrangarh/20241011_125912.jpg","images/mehrangarh/20241011_132830.jpg","images/mehrangarh/20241011_132832.jpg","images/mehrangarh/20241011_132841.jpg","images/mehrangarh/20241011_132849.jpg"],
+      'jaswant-thada': [],
+      'toorjikajhalra': [],
+      'afri': [],
+      'cazri': []
+    };
+
+    let gallery;
+
+    const openAlbum = (album) => {
+      console.log(album, gallery);
+      gallery.params.photos = photos[album];
+      gallery.params.thumbs = thumbs[album];
+      gallery.open();
+    }
+    $on('pageInit', () => {
+      // Create PBs when page init
+      gallery = $f7.photoBrowser.create({
+        //photos: photos['mehrangarh-fort'],
+        //thumbs: thumbs['mehrangarh-fort'],
+        theme: 'dark',
+        swiper: {
+          preloadImages: false,
+          lazy: {
+            enabled: true,
+          },
+        },
+      });
+    });
+    $on('pageBeforeRemove', () => {
+      // Destroy PBs on page remove
+      gallery.destroy();
+    });
+
+    return $render;
+  };
+</script>
