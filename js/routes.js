@@ -3,61 +3,56 @@ var routes = [
   {
     path: '/',
     componentUrl: './pages/main.html',
-    name: 'home',
+    name: 'main',
+    tabs: [
+      {
+        path: '/',
+        id: 'home',
+        componentUrl: './pages/tabs/home.html',
+        name: 'home',
+      },
+      {
+        path: '/apps/',
+        id: 'apps',
+        url: './pages/tabs/apps.html',
+        name: 'apps',
+      },
+    ],
   },
   {
-    path: '/gallery/',
-    url: './nav/gallery.html',
+    path: '/:arg1/',
+    componentUrl: './pages/{{arg1}}.html',
   },
   {
-    path: '/calendar/',
-    componentUrl: './nav/calendar.html',
+    path: '/:arg1',
+    url: './pages/{{arg1}}.html',
   },
   {
-    path: '/products/',
-    content: `
-      <div class="page">
-          <div class="navbar">
-            <div class="navbar-bg"></div>
-            <div class="navbar-inner sliding">
-            <div class="left">
-              <a class="link back">
-                <i class="icon icon-back"></i>
-                <span class="if-not-md">Jodhana.IN</span>
-              </a>
-            </div>
-              <div class="title">Products</div>
-            </div>
-          </div>
-          <div class="page-content">
-            <div class="list links-list">
-              <ul>
-                
-                
-              </ul>
-            </div>
-          </div>
-        </div>
-    `,
+    path: '/settings/:arg1',
+    url: './pages/settings/{{arg1}}.html',
+  },
+  {
+    path: '/apps/:arg1/',
+    componentUrl: './pages/apps/{{arg1}}.html',
   },
   {
     path: '/user/:arg1/',
-    componentUrl: './user/{{arg1}}.html',
+    componentUrl: './pages/user/{{arg1}}.html',
   },
   
   {
     path: '/user/:arg1',
-    url: './user/{{arg1}}.html',
+    url: './pages/users/{{arg1}}.html',
   },
 
   {
     path: '/blog/:arg1/',
-    componentUrl: './blog/{{arg1}}.html',
+    componentUrl: './pages/blog/{{arg1}}.html',
   },
   
   {
     path: '/blog/:arg1',
-    url: './blog/{{arg1}}.html',
+    url: './pages/blog/{{arg1}}.html',
   },
 
   // Default route (404 page). MUST BE THE LAST
