@@ -12,6 +12,7 @@
   <title>Jodhana.IN</title>
   <link rel="stylesheet" href="css/f7-bundle.min.css">
   <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/appstore.css">
   <link rel="apple-touch-icon" href="img/icon-square.png">
   <link rel="icon" href="img/icon.png">
 </head>
@@ -19,34 +20,21 @@
 <body>
   <div id="app">
     <div class="panel panel-left panel-floating panel-resizable panel-init">
-      <div class="view view-init view-left" data-name="left" data-url="/">
-        <div class="page">
-          <div class="navbar">
-            <div class="navbar-bg"></div>
-            <div class="navbar-inner sliding">
-              <div class="title">Jodhana.IN</div>
-            </div>
-          </div>
-          <div class="page-content">
-            <div class="list links-list">
-              <ul>
-                <li><a href="/blog/">Blogs</a></li>
-                <li><a href="/products/">Products</a></li>
-                
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div class="view view-right view-init safe-areas" data-master-detail-breakpoint="768" data-url="/left-panel"></div>
     </div>
-    <div class="panel panel-right panel-floating panel-resizable panel-init">
-      <div class="view view-right view-init safe-areas" data-master-detail-breakpoint="768" data-url="/calendar/"></div></div>
     <div class="view view-main view-init safe-areas" data-master-detail-breakpoint="768" data-url="/"></div>
   </div>
   <script src="js/f7-bundle.min.js"></script>
   <script src="js/routes.js"></script>
   <script src="js/store.js"></script>
   <script src="js/app.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QLKBE7QFSB"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-QLKBE7QFSB');
+  </script>
 </body>
 
 </html>
