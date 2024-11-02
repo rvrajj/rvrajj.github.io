@@ -19,20 +19,18 @@ if (document.location.href.includes('example-preview')) {
 
 // Theme
 var theme = 'ios';
-if (document.location.search.indexOf('theme=') >= 0) {
-  theme = document.location.search.split('theme=')[1].split('&')[0];
-}
-if (document.location.search.indexOf('mode=') >= 0) {
-  const mode = document.location.search.split('mode=')[1].split('&')[0];
-  if (mode === 'dark') document.documentElement.classList.add('dark');
-}
-
+document.documentElement.classList.add('dark');
 // Init App
 var app = new Framework7({
   el: '#app',
   theme,
+  view: {
+    componentCache: false,
+    browserHistory: false,
+  },
   // store.js,
   store: store,
+  darkMode: localStorage?.getItem('darkmode-'+theme) == "false" ? false : true,
   // routes.js,
   routes: routes,
   popup: {
