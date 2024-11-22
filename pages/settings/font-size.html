@@ -1,0 +1,93 @@
+<template>
+  <div class="page">
+    <div class="navbar">
+      <div class="navbar-bg"></div>
+      <div class="navbar-inner sliding">
+        <div class="left">
+          <a class="link back">
+            <i class="icon icon-back"></i>
+            <span class="if-not-md">Settings</span>
+          </a>
+        </div>
+        <div class="title">Font Size</div>
+      </div>
+    </div>
+    <div class="page-content">
+      <div class="block block-strong-ios block-outline-ios">
+        <div class="font-size range-slider range-slider-init" data-min="12" data-max="20" data-label="true" data-step="0.5" data-scale="true" data-scale-steps="4" data-scale-sub-steps="4"></div>
+      </div>
+      
+      <div class="block-title">Title</div>
+      
+      <div class="block block-strong-ios block-outline-ios">
+        <!-- header -->
+        <div class="block-header">Header</div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse faucibus mauris leo, eu bibendum
+        neque congue non. Ut leo mauris, eleifend eu commodo a, egestas ac urna. Maecenas in lacus faucibus,
+        viverra ipsum pulvinar, molestie arcu. Etiam lacinia venenatis dignissim. Suspendisse non nisl semper
+        tellus malesuada suscipit eu et eros. Nulla eu enim quis quam elementum vulputate. Mauris ornare
+        consequat nunc viverra pellentesque. Aenean semper eu massa sit amet aliquam. Integer et neque sed
+        libero mollis elementum at vitae ligula. Vestibulum pharetra sed libero sed porttitor. Suspendisse a
+        faucibus lectus.</p>
+        <p>Duis ut mauris sollicitudin, venenatis nisi sed, luctus ligula. Phasellus blandit nisl ut lorem semper
+        pharetra. Nullam tortor nibh, suscipit in consequat vel, feugiat sed quam. Nam risus libero, auctor vel
+        tristique ac, malesuada ut ante. Sed molestie, est in eleifend sagittis, leo tortor ullamcorper erat, at
+        vulputate eros sapien nec libero. Mauris dapibus laoreet nibh quis bibendum. Fusce dolor sem, suscipit
+        in iaculis id, pharetra at urna. Pellentesque tempor congue massa quis faucibus. Vestibulum nunc eros,
+        convallis blandit dui sit amet, gravida adipiscing libero.</p>
+        <!-- footer -->
+        <div class="block-footer">Footer</div>
+      </div>
+      
+      
+    </div>
+  </div>
+</template>
+<script>
+  export default (props, { $f7, $on, $el, $update }) => {
+    
+    const getFS = (varName) => {
+      return +$('body').styles().getPropertyValue(varName).split('px')[0];
+    };
+    
+    const setFS = (varName, size) => {
+      document.documentElement.style.setProperty(varName, `${size}px`);
+    }
+    
+    let blockFSInitial = blockFS = getFS('--f7-font-size');
+    const headerFS = getFS('--f7-block-header-font-size');
+    const footerFS = getFS('--f7-block-footer-font-size');
+    const titleFS = getFS('--f7-block-title-font-size');
+    const titleMediumFS = getFS('--f7-block-title-medium-font-size');
+    const titleLargeFS = getFS('--f7-block-title-large-font-size');
+    console.log("root", blockFSInitial, blockFS, headerFS, footerFS, titleFS, titleMediumFS, titleLargeFS);
+    
+    
+    const fontSizeChange = (e) => {
+      const range = $f7.range.get(e.target);
+      console.log(range);
+      blockFS = range.value;
+      console.log("fontSizeChange", blockFSInitial, blockFS, blockFS*headerFS/blockFSInitial, blockFS*footerFS/blockFSInitial, blockFS*(titleFS||1)/blockFSInitial, blockFS*titleMediumFS/blockFSInitial, blockFS*titleLargeFS)/blockFSInitial;
+      setFS('--f7-block-font-size', blockFS);
+      setFS('--f7-block-header-font-size', blockFS*headerFS/blockFSInitial)
+      setFS('--f7-block-footer-font-size', blockFS*footerFS/blockFSInitial)
+      setFS('--f7-block-title-font-size', blockFS*(titleFS||1)/blockFSInitial)
+      setFS('--f7-block-title-medium-font-size', blockFS*titleMediumFS/blockFSInitial)
+      setFS('--f7-block-title-large-font-size', blockFS*titleLargeFS/blockFSInitial);
+    };
+    
+    $on('pageBeforeIn', () => {
+      blockFS = getFS('--f7-block-font-size') || getFS('--f7-font-size');
+      
+      console.log("pageBeforeIn", blockFS);
+      $f7.range.setValue('.font-size', blockFS);
+    });
+    
+    $on('pageAfterIn', () => {
+      console.log("pageAfterIn", blockFS);
+      $f7.range.get().on('change', fontSizeChange);
+    });
+
+    return $render;
+  };
+</script>
