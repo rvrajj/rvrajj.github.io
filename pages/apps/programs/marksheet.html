@@ -1,0 +1,176 @@
+<template>
+<div class="page">
+  <div class="navbar">
+    <div class="navbar-bg"></div>
+    <div class="navbar-inner sliding">
+      <div class="left">
+        <a class="link back">
+          <i class="icon icon-back"></i>
+          <span class="if-not-md">Back</span>
+        </a>
+      </div>
+      <div class="title">Marksheet</div>
+    </div>
+  </div>
+  <div class="page-content">
+    
+    <div class="block-title">Enter Student's Information</div>
+    <div class="list list-strong-ios list-dividers-ios inset-ios">
+      <ul>
+        <li class="item-content item-input item-input-outline">
+          <div class="item-media">
+            <i class="icon demo-list-icon"></i>
+          </div>
+          <div class="item-inner">
+            <div class="item-title item-floating-label">Student's Name</div>
+            <div class="item-input-wrap">
+              <input type="text" name="name" placeholder="Enter Student's Name" />
+              <span class="input-clear-button"></span>
+            </div>
+          </div>
+        </li>
+        <li class="item-content item-input item-input-outline">
+          <div class="item-media">
+            <i class="icon demo-list-icon"></i>
+          </div>
+          <div class="item-inner">
+            <div class="item-title item-floating-label">Father's Name</div>
+            <div class="item-input-wrap">
+              <input type="text" name="fname" placeholder="Enter Father's Name" />
+              <span class="input-clear-button"></span>
+            </div>
+          </div>
+        </li>
+        <li class="item-content item-input item-input-outline">
+          <div class="item-media">
+            <i class="icon demo-list-icon"></i>
+          </div>
+          <div class="item-inner">
+            <div class="item-title item-floating-label">Mother's Name</div>
+            <div class="item-input-wrap">
+              <input type="text" name="mname" placeholder="Enter Mother's Name" />
+              <span class="input-clear-button"></span>
+            </div>
+          </div>
+        </li>
+        
+        <li class="item-content item-input item-input-outline">
+          <div class="item-media">
+            <i class="icon demo-list-icon"></i>
+          </div>
+          <div class="item-inner">
+            <div class="item-title item-floating-label">Date of Birth</div>
+            <div class="item-input-wrap">
+              <input type="date" name="dob" placeholder="Enter Date of Birth"/>
+              <span class="input-clear-button"></span>
+            </div>
+          </div>
+        </li>
+        <li class="item-content item-input item-input-outline">
+          <div class="item-media">
+            <i class="icon demo-list-icon"></i>
+          </div>
+          <div class="item-inner">
+            <div class="item-title item-floating-label">Roll No.</div>
+            <div class="item-input-wrap">
+              <input type="text" name="fname" placeholder="Enter Roll No." />
+              <span class="input-clear-button"></span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    
+    
+    <div class="block-title">Enter Institution's Information</div>
+    <div class="list list-strong-ios list-dividers-ios inset-ios">
+      <ul>
+        <li class="item-content item-input item-input-outline">
+          <div class="item-media">
+            <i class="icon demo-list-icon"></i>
+          </div>
+          <div class="item-inner">
+            <div class="item-title item-floating-label">Institution's Name</div>
+            <div class="item-input-wrap">
+              <input type="text" name="name" placeholder="Enter Institution's Name" />
+              <span class="input-clear-button"></span>
+            </div>
+          </div>
+        </li>
+        <li class="item-content item-input item-input-outline">
+          <div class="item-media">
+            <i class="icon demo-list-icon"></i>
+          </div>
+          <div class="item-inner">
+            <div class="item-title item-floating-label">City</div>
+            <div class="item-input-wrap">
+              <input type="text" name="name" placeholder="Enter City" />
+              <span class="input-clear-button"></span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    
+    
+    <div class="block-title">Enter Subjects & Marks</div>
+    
+    
+    <div class="list list-strong-ios list-dividers-ios inset-ios">
+      
+      <ul>
+        <li class="item-content item-input item-input-outline">
+          <div class="item-media">
+            <i class="icon demo-list-icon"></i>
+          </div>
+          <div class="item-inner">
+            <div class="item-title item-floating-label">Institution's Name</div>
+            <div class="item-input-wrap">
+              <input type="text" name="name" placeholder="Enter Institution's Name" />
+              <span class="input-clear-button"></span>
+            </div>
+          </div>
+        </li>
+        <li class="item-content item-input item-input-outline">
+          <div class="item-media">
+            <i class="icon demo-list-icon"></i>
+          </div>
+          <div class="item-inner">
+            <div class="item-title item-floating-label">City</div>
+            <div class="item-input-wrap">
+              <input type="text" name="name" placeholder="Enter City" />
+              <span class="input-clear-button"></span>
+            </div>
+          </div>
+        </li>
+        
+        <li class="item-content grid grid-cols-2 grid-gap">
+          <div></div>
+          <div>
+            <button class="button button-fill">
+              Add Subject
+            </button>
+          </div>
+        </li>
+        
+      </ul>
+      
+    </div>
+
+
+  </div>
+</div>
+</template>
+<script>
+  export default (props, { $f7, $on }) => {
+    
+    $on('pageInit', () => {
+      
+    });
+    $on('pageBeforeRemove', () => {
+      
+    });
+
+    return $render;
+  };
+</script>
