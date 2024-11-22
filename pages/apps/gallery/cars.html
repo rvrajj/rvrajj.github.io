@@ -1,0 +1,2868 @@
+<template>
+  <div class="page">
+    <div class="navbar">
+      <div class="navbar-bg"></div>
+      <div class="navbar-inner sliding">
+        <div class="left">
+          <a class="link back">
+            <i class="icon icon-back"></i>
+            <span class="if-not-md">Gallery</span>
+          </a>
+        </div>
+        <div class="title">
+          Cars
+        </div>
+        <div class="right">
+          <a class="link icon-only popover-open" data-popover=".popover-menu">
+            <i class="icon f7-icons if-not-md">ellipsis</i>
+            <i class="icon material-icons md-only">more_vert</i>
+          </a>
+          <div class="popover popover-menu" style="width: 120px">
+            <div class="popover-angle"></div>
+            <div class="popover-inner">
+              <div class="list">
+                <ul>
+                  <li><a class="list-button popover-close">Test</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--div class="title-large">
+          <div class="title-large-text">
+            Cars
+          </div>
+        </div-->
+      </div>
+    </div>
+
+    <div class="page-content">
+
+      ${Object.keys(carBrands).length > 0 && Object.keys(carBrands).map((brand) => $h`
+
+      <div class="block-title text-color-red">
+        ${brand}
+      </div>
+
+
+
+      <div class="block featured-apps">
+
+
+        ${carBrands[brand] === null && $h`
+
+        <div class="featured-app">
+          <a>
+            <div class="featured-app-headline">
+              --
+            </div>
+            <div class="featured-app-title">
+              --
+            </div>
+            <div class="featured-app-subtitle">
+              --
+            </div>
+            <img loading="lazy" class="featured-app-image" alt="--" src="/assets/images/cars/Default.jpg" />
+          </a>
+        </div>
+
+        `}
+
+
+
+        ${carBrands[brand] && carBrands[brand].length > 0 && carBrands[brand].map((car) => $h`
+        <div class="featured-app">
+          <a @click="${() => openAlbum(brand, car.image)}">
+            <div class="featured-app-headline">
+              ${car.seatingCapacity}
+            </div>
+            <div class="featured-app-title">
+              ${car.name}
+            </div>
+            <div class="featured-app-subtitle">
+              ${car.fuelType}
+            </div>
+            <img loading="lazy" class="featured-app-image" alt="${car.name}" src="${car.image}" />
+          </a>
+        </div>
+        `)}
+
+
+      </div>
+
+      `)}
+
+
+    </div>
+  </div>
+</template>
+<script>
+  export default (props, {
+    $f7, $on
+  }) => {
+
+    let carBrands = {
+      "Maruti": [{
+        "name": "Swift",
+        "minPrice": "6.49 Lakh",
+        "priceRange": "6.49 - 9.59 Lakh",
+        "image": "/assets/images/cars/Maruti.Swift.jpg",
+        "modelName": "Maruti Swift",
+        "mileage": "24.8 to 25.75 kmpl",
+        "seatingCapacity": "5 Seats",
+        "fuelType": "Petrol"
+      },
+        {
+          "name": "Brezza",
+          "minPrice": "8.34 Lakh",
+          "priceRange": "8.34 - 14.14 Lakh",
+          "image": "/assets/images/cars/Maruti.Brezza.jpg",
+          "modelName": "Maruti Brezza",
+          "mileage": "17.38 to 19.89 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol / CNG"
+        },
+        {
+          "name": "FRONX",
+          "minPrice": "7.51 Lakh",
+          "priceRange": "7.51 - 13.04 Lakh",
+          "image": "/assets/images/cars/Maruti.FRONX.jpg",
+          "modelName": "Maruti FRONX",
+          "mileage": "20.01 to 22.89 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol / CNG"
+        },
+        {
+          "name": "Ertiga",
+          "minPrice": "8.69 Lakh",
+          "priceRange": "8.69 - 13.03 Lakh",
+          "image": "/assets/images/cars/Maruti.Ertiga.jpg",
+          "modelName": "Maruti Ertiga",
+          "mileage": "20.3 to 20.51 kmpl",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Petrol / CNG"
+        },
+        {
+          "name": "Baleno",
+          "minPrice": "6.66 Lakh",
+          "priceRange": "6.66 - 9.83 Lakh",
+          "image": "/assets/images/cars/Maruti.Baleno.jpg",
+          "modelName": "Maruti Baleno",
+          "mileage": "22.35 to 22.94 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol / CNG"
+        },
+        {
+          "name": "Dzire",
+          "minPrice": "6.57 Lakh",
+          "priceRange": "6.57 - 9.34 Lakh",
+          "image": "/assets/images/cars/Maruti.Dzire.jpg",
+          "modelName": "Maruti Dzire",
+          "mileage": "22.41 to 22.61 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol / CNG"
+        },
+        {
+          "name": "Wagon R",
+          "minPrice": "5.54 Lakh",
+          "priceRange": "5.54 - 7.33 Lakh",
+          "image": "/assets/images/cars/Maruti.Wagon R.jpg",
+          "modelName": "Maruti Wagon R",
+          "mileage": "23.56 to 25.19 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol / CNG"
+        },
+        {
+          "name": "Alto K10",
+          "minPrice": "3.99 Lakh",
+          "priceRange": "3.99 - 5.96 Lakh",
+          "image": "/assets/images/cars/Maruti.Alto K10.jpg",
+          "modelName": "Maruti Alto K10",
+          "mileage": "24.39 to 24.9 kmpl",
+          "seatingCapacity": "4 Seats",
+          "fuelType": "Petrol / CNG"
+        },
+        {
+          "name": "Celerio",
+          "minPrice": "4.99 Lakh",
+          "priceRange": "4.99 - 7.04 Lakh",
+          "image": "/assets/images/cars/Maruti.Celerio.jpg",
+          "modelName": "Maruti Celerio",
+          "mileage": "24.97 to 26.68 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol / CNG"
+        },
+        {
+          "name": "Jimny",
+          "minPrice": "12.74 Lakh",
+          "priceRange": "12.74 - 14.95 Lakh",
+          "image": "/assets/images/cars/Maruti.Jimny.jpg",
+          "modelName": "Maruti Jimny",
+          "mileage": "16.39 to 16.94 kmpl",
+          "seatingCapacity": "4 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "Eeco",
+          "minPrice": "5.32 Lakh",
+          "priceRange": "5.32 - 6.58 Lakh",
+          "image": "/assets/images/cars/Maruti.Eeco.jpg",
+          "modelName": "Maruti Eeco",
+          "mileage": "19.71 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol / CNG"
+        },
+        {
+          "name": "XL6",
+          "minPrice": "11.61 Lakh",
+          "priceRange": "11.61 - 14.77 Lakh",
+          "image": "/assets/images/cars/Maruti.XL6.jpg",
+          "modelName": "Maruti XL6",
+          "mileage": "20.27 to 20.97 kmpl",
+          "seatingCapacity": "6 Seats",
+          "fuelType": "Petrol / CNG"
+        },
+        {
+          "name": "Ignis",
+          "minPrice": "5.49 Lakh",
+          "priceRange": "5.49 - 8.06 Lakh",
+          "image": "/assets/images/cars/Maruti.Ignis.jpg",
+          "modelName": "Maruti Ignis",
+          "mileage": "20.89 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "S-Presso",
+          "minPrice": "4.26 Lakh",
+          "priceRange": "4.26 - 6.12 Lakh",
+          "image": "/assets/images/cars/Maruti.S-Presso.jpg",
+          "modelName": "Maruti S-Presso",
+          "mileage": "24.12 to 25.3 kmpl",
+          "seatingCapacity": "4 Seats",
+          "fuelType": "Petrol / CNG"
+        },
+        {
+          "name": "Ciaz",
+          "minPrice": "9.40 Lakh",
+          "priceRange": "9.40 - 12.29 Lakh",
+          "image": "/assets/images/cars/Maruti.Ciaz.jpg",
+          "modelName": "Maruti Ciaz",
+          "mileage": "20.04 to 20.65 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "Invicto",
+          "minPrice": "25.21 Lakh",
+          "priceRange": "25.21 - 28.92 Lakh",
+          "image": "/assets/images/cars/Maruti.Invicto.jpg",
+          "modelName": "Maruti Invicto",
+          "mileage": "23.24 kmpl",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "Ertiga Tour",
+          "minPrice": "9.75 Lakh",
+          "priceRange": "9.75 - 10.70 Lakh",
+          "image": "/assets/images/cars/Maruti.Ertiga Tour.jpg",
+          "modelName": "Maruti Ertiga Tour",
+          "mileage": "18.04 kmpl",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Petrol / CNG"
+        },
+        {
+          "name": "Alto 800 tour",
+          "minPrice": "4.80 Lakh",
+          "priceRange": "4.80 Lakh",
+          "image": "/assets/images/cars/Maruti.Alto 800 tour.jpg",
+          "modelName": "Maruti Alto 800 tour",
+          "mileage": "22.05 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "Eeco Cargo",
+          "minPrice": "5.42 Lakh",
+          "priceRange": "5.42 - 6.74 Lakh",
+          "image": "/assets/images/cars/Maruti.Eeco Cargo.jpg",
+          "modelName": "Maruti Eeco Cargo",
+          "mileage": "20.2 kmpl",
+          "seatingCapacity": "2 Seats",
+          "fuelType": "Petrol / CNG"
+        },
+        {
+          "name": "Grand Vitara",
+          "minPrice": "10.99 Lakh",
+          "priceRange": "10.99 - 20.09 Lakh",
+          "image": "/assets/images/cars/Maruti.Grand Vitara.jpg",
+          "modelName": "Maruti Grand Vitara",
+          "mileage": "19.38 to 27.97 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol / CNG"
+        },
+        {
+          "name": "Super Carry",
+          "minPrice": "5.16 Lakh",
+          "priceRange": "5.16 - 6.30 Lakh",
+          "image": "/assets/images/cars/Maruti.Super Carry.jpg",
+          "modelName": "Maruti Super Carry",
+          "mileage": "",
+          "seatingCapacity": "2 Seats",
+          "fuelType": "Petrol / CNG"
+        },
+        {
+          "name": "Swift Dzire Tour",
+          "minPrice": "6.51 Lakh",
+          "priceRange": "6.51 - 7.46 Lakh",
+          "image": "/assets/images/cars/Maruti.Swift Dzire Tour.jpg",
+          "modelName": "Maruti Swift Dzire Tour",
+          "mileage": "23.15 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol / CNG"
+        },
+        {
+          "name": "Wagon R tour",
+          "minPrice": "5.51 Lakh",
+          "priceRange": "5.51 - 6.42 Lakh",
+          "image": "/assets/images/cars/Maruti.Wagon R tour.jpg",
+          "modelName": "Maruti Wagon R tour",
+          "mileage": "25.4 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol / CNG"
+        }],
+      "Tata": [{
+        "name": "Curvv",
+        "minPrice": "10 Lakh",
+        "priceRange": "10 - 19 Lakh",
+        "image": "/assets/images/cars/Tata.Curvv.jpg",
+        "modelName": "Tata Curvv",
+        "mileage": "",
+        "seatingCapacity": "5 Seats",
+        "fuelType": "Diesel / Petrol"
+      },
+        {
+          "name": "Punch",
+          "minPrice": "6 Lakh",
+          "priceRange": "6 - 10.20 Lakh",
+          "image": "/assets/images/cars/Tata.Punch.jpg",
+          "modelName": "Tata Punch",
+          "mileage": "18.8 to 20.09 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol / CNG"
+        },
+        {
+          "name": "Nexon",
+          "minPrice": "8 Lakh",
+          "priceRange": "8 - 15.80 Lakh",
+          "image": "/assets/images/cars/Tata.Nexon.jpg",
+          "modelName": "Tata Nexon",
+          "mileage": "17.01 to 24.08 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel / Petrol"
+        },
+        {
+          "name": "Harrier",
+          "minPrice": "15.49 Lakh",
+          "priceRange": "15.49 - 26.44 Lakh",
+          "image": "/assets/images/cars/Tata.Harrier.jpg",
+          "modelName": "Tata Harrier",
+          "mileage": "16.8 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Safari",
+          "minPrice": "16.19 Lakh",
+          "priceRange": "16.19 - 27.34 Lakh",
+          "image": "/assets/images/cars/Tata.Safari.jpg",
+          "modelName": "Tata Safari",
+          "mileage": "16.3 kmpl",
+          "seatingCapacity": "6 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Tiago",
+          "minPrice": "5.65 Lakh",
+          "priceRange": "5.65 - 8.90 Lakh",
+          "image": "/assets/images/cars/Tata.Tiago.jpg",
+          "modelName": "Tata Tiago",
+          "mileage": "19 to 20.09 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol / CNG"
+        },
+        {
+          "name": "Altroz",
+          "minPrice": "6.65 Lakh",
+          "priceRange": "6.65 - 11.35 Lakh",
+          "image": "/assets/images/cars/Tata.Altroz.jpg",
+          "modelName": "Tata Altroz",
+          "mileage": "23.64 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel / Petrol / CNG"
+        },
+        {
+          "name": "Curvv EV",
+          "minPrice": "17.49 Lakh",
+          "priceRange": "17.49 - 21.99 Lakh",
+          "image": "/assets/images/cars/Tata.Curvv EV.jpg",
+          "modelName": "Tata Curvv EV",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Electric"
+        },
+        {
+          "name": "Punch EV",
+          "minPrice": "10.99 Lakh",
+          "priceRange": "10.99 - 15.49 Lakh",
+          "image": "/assets/images/cars/Tata.Punch EV.jpg",
+          "modelName": "Tata Punch EV",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Electric"
+        },
+        {
+          "name": "Nexon EV",
+          "minPrice": "14.49 Lakh",
+          "priceRange": "14.49 - 19.49 Lakh",
+          "image": "/assets/images/cars/Tata.Nexon EV.jpg",
+          "modelName": "Tata Nexon EV",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Electric"
+        },
+        {
+          "name": "Tiago EV",
+          "minPrice": "7.99 Lakh",
+          "priceRange": "7.99 - 11.89 Lakh",
+          "image": "/assets/images/cars/Tata.Tiago EV.jpg",
+          "modelName": "Tata Tiago EV",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Electric"
+        },
+        {
+          "name": "Tigor",
+          "minPrice": "6.30 Lakh",
+          "priceRange": "6.30 - 9.55 Lakh",
+          "image": "/assets/images/cars/Tata.Tigor.jpg",
+          "modelName": "Tata Tigor",
+          "mileage": "19.28 to 19.6 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol / CNG"
+        },
+        {
+          "name": "Altroz Racer",
+          "minPrice": "9.49 Lakh",
+          "priceRange": "9.49 - 10.99 Lakh",
+          "image": "/assets/images/cars/Tata.Altroz Racer.jpg",
+          "modelName": "Tata Altroz Racer",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "Tiago NRG",
+          "minPrice": "6.70 Lakh",
+          "priceRange": "6.70 - 8.80 Lakh",
+          "image": "/assets/images/cars/Tata.Tiago NRG.jpg",
+          "modelName": "Tata Tiago NRG",
+          "mileage": "20.09 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol / CNG"
+        },
+        {
+          "name": "Tigor EV",
+          "minPrice": "12.49 Lakh",
+          "priceRange": "12.49 - 13.75 Lakh",
+          "image": "/assets/images/cars/Tata.Tigor EV.jpg",
+          "modelName": "Tata Tigor EV",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Electric"
+        },
+        {
+          "name": "Yodha Pickup",
+          "minPrice": "6.95 Lakh",
+          "priceRange": "6.95 - 7.50 Lakh",
+          "image": "/assets/images/cars/Tata.Yodha Pickup.jpg",
+          "modelName": "Tata Yodha Pickup",
+          "mileage": "",
+          "seatingCapacity": "2 Seats",
+          "fuelType": "Diesel"
+        }],
+      "Kia": [{
+        "name": "Seltos",
+        "minPrice": "10.90 Lakh",
+        "priceRange": "10.90 - 20.45 Lakh",
+        "image": "/assets/images/cars/Kia.Seltos.jpg",
+        "modelName": "Kia Seltos",
+        "mileage": "17 to 20.7 kmpl",
+        "seatingCapacity": "5 Seats",
+        "fuelType": "Diesel / Petrol"
+      },
+        {
+          "name": "Sonet",
+          "minPrice": "8 Lakh",
+          "priceRange": "8 - 15.77 Lakh",
+          "image": "/assets/images/cars/Kia.Sonet.jpg",
+          "modelName": "Kia Sonet",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel / Petrol"
+        },
+        {
+          "name": "EV6",
+          "minPrice": "60.97 Lakh",
+          "priceRange": "60.97 - 65.97 Lakh",
+          "image": "/assets/images/cars/Kia.EV6.jpg",
+          "modelName": "Kia EV6",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Electric"
+        },
+        {
+          "name": "Carens",
+          "minPrice": "10.52 Lakh",
+          "priceRange": "10.52 - 19.94 Lakh",
+          "image": "/assets/images/cars/Kia.Carens.jpg",
+          "modelName": "Kia Carens",
+          "mileage": "21 kmpl",
+          "seatingCapacity": "6 Seats",
+          "fuelType": "Diesel / Petrol"
+        }],
+      "Toyota": [{
+        "name": "Fortuner",
+        "minPrice": "33.43 Lakh",
+        "priceRange": "33.43 - 51.44 Lakh",
+        "image": "/assets/images/cars/Toyota.Fortuner.jpg",
+        "modelName": "Toyota Fortuner",
+        "mileage": "10 kmpl",
+        "seatingCapacity": "7 Seats",
+        "fuelType": "Diesel / Petrol"
+      },
+        {
+          "name": "Innova Crysta",
+          "minPrice": "19.99 Lakh",
+          "priceRange": "19.99 - 26.30 Lakh",
+          "image": "/assets/images/cars/Toyota.Innova Crysta.jpg",
+          "modelName": "Toyota Innova Crysta",
+          "mileage": "",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Land Cruiser 300",
+          "minPrice": "2.10 Cr",
+          "priceRange": "2.10 Cr",
+          "image": "/assets/images/cars/Toyota.Land Cruiser 300.jpg",
+          "modelName": "Toyota Land Cruiser 300",
+          "mileage": "11 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Urban Cruiser Hyryder",
+          "minPrice": "11.14 Lakh",
+          "priceRange": "11.14 - 19.99 Lakh",
+          "image": "/assets/images/cars/Toyota.Urban Cruiser Hyryder.jpg",
+          "modelName": "Toyota Urban Cruiser Hyryder",
+          "mileage": "19.39 to 27.97 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol / CNG"
+        },
+        {
+          "name": "Hilux",
+          "minPrice": "30.40 Lakh",
+          "priceRange": "30.40 - 37.90 Lakh",
+          "image": "/assets/images/cars/Toyota.Hilux.jpg",
+          "modelName": "Toyota Hilux",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Taisor",
+          "minPrice": "7.74 Lakh",
+          "priceRange": "7.74 - 13.04 Lakh",
+          "image": "/assets/images/cars/Toyota.Taisor.jpg",
+          "modelName": "Toyota Taisor",
+          "mileage": "20 to 22.8 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol / CNG"
+        },
+        {
+          "name": "Camry",
+          "minPrice": "46.17 Lakh",
+          "priceRange": "46.17 Lakh",
+          "image": "/assets/images/cars/Toyota.Camry.jpg",
+          "modelName": "Toyota Camry",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "Vellfire",
+          "minPrice": "1.22 Cr",
+          "priceRange": "1.22 - 1.32 Cr",
+          "image": "/assets/images/cars/Toyota.Vellfire.jpg",
+          "modelName": "Toyota Vellfire",
+          "mileage": "",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "Rumion",
+          "minPrice": "10.44 Lakh",
+          "priceRange": "10.44 - 13.73 Lakh",
+          "image": "/assets/images/cars/Toyota.Rumion.jpg",
+          "modelName": "Toyota Rumion",
+          "mileage": "20.11 to 20.51 kmpl",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Petrol / CNG"
+        },
+        {
+          "name": "Fortuner Legender",
+          "minPrice": "43.66 Lakh",
+          "priceRange": "43.66 - 47.64 Lakh",
+          "image": "/assets/images/cars/Toyota.Fortuner Legender.jpg",
+          "modelName": "Toyota Fortuner Legender",
+          "mileage": "",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Glanza",
+          "minPrice": "6.86 Lakh",
+          "priceRange": "6.86 - 10 Lakh",
+          "image": "/assets/images/cars/Toyota.Glanza.jpg",
+          "modelName": "Toyota Glanza",
+          "mileage": "22.35 to 22.94 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol / CNG"
+        },
+        {
+          "name": "Innova Hycross",
+          "minPrice": "19.77 Lakh",
+          "priceRange": "19.77 - 30.98 Lakh",
+          "image": "/assets/images/cars/Toyota.Innova Hycross.jpg",
+          "modelName": "Toyota Innova Hycross",
+          "mileage": "16.13 to 23.24 kmpl",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Petrol"
+        }],
+      "Hyundai": [{
+        "name": "Creta",
+        "minPrice": "11 Lakh",
+        "priceRange": "11 - 20.30 Lakh",
+        "image": "/assets/images/cars/Hyundai.Creta.jpg",
+        "modelName": "Hyundai Creta",
+        "mileage": "17.4 to 21.8 kmpl",
+        "seatingCapacity": "5 Seats",
+        "fuelType": "Diesel / Petrol"
+      },
+        {
+          "name": "Alcazar",
+          "minPrice": "16.77 Lakh",
+          "priceRange": "16.77 - 21.28 Lakh",
+          "image": "/assets/images/cars/Hyundai.Alcazar.jpg",
+          "modelName": "Hyundai Alcazar",
+          "mileage": "24.5 kmpl",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Diesel / Petrol"
+        },
+        {
+          "name": "Venue",
+          "minPrice": "7.94 Lakh",
+          "priceRange": "7.94 - 13.48 Lakh",
+          "image": "/assets/images/cars/Hyundai.Venue.jpg",
+          "modelName": "Hyundai Venue",
+          "mileage": "24.2 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel / Petrol"
+        },
+        {
+          "name": "Exter",
+          "minPrice": "6 Lakh",
+          "priceRange": "6 - 10.43 Lakh",
+          "image": "/assets/images/cars/Hyundai.Exter.jpg",
+          "modelName": "Hyundai Exter",
+          "mileage": "19.2 to 19.4 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol / CNG"
+        },
+        {
+          "name": "Verna",
+          "minPrice": "11 Lakh",
+          "priceRange": "11 - 17.42 Lakh",
+          "image": "/assets/images/cars/Hyundai.Verna.jpg",
+          "modelName": "Hyundai Verna",
+          "mileage": "18.6 to 20.6 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "i20",
+          "minPrice": "7.04 Lakh",
+          "priceRange": "7.04 - 11.21 Lakh",
+          "image": "/assets/images/cars/Hyundai.i20.jpg",
+          "modelName": "Hyundai i20",
+          "mileage": "16 to 20 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "Aura",
+          "minPrice": "6.49 Lakh",
+          "priceRange": "6.49 - 9.05 Lakh",
+          "image": "/assets/images/cars/Hyundai.Aura.jpg",
+          "modelName": "Hyundai Aura",
+          "mileage": "17 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol / CNG"
+        },
+        {
+          "name": "Tucson",
+          "minPrice": "29.02 Lakh",
+          "priceRange": "29.02 - 35.94 Lakh",
+          "image": "/assets/images/cars/Hyundai.Tucson.jpg",
+          "modelName": "Hyundai Tucson",
+          "mileage": "18 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel / Petrol"
+        },
+        {
+          "name": "Creta N Line",
+          "minPrice": "16.82 Lakh",
+          "priceRange": "16.82 - 20.45 Lakh",
+          "image": "/assets/images/cars/Hyundai.Creta N Line.jpg",
+          "modelName": "Hyundai Creta N Line",
+          "mileage": "18 to 18.2 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "Kona Electric",
+          "minPrice": "23.84 Lakh",
+          "priceRange": "23.84 - 24.03 Lakh",
+          "image": "/assets/images/cars/Hyundai.Kona Electric.jpg",
+          "modelName": "Hyundai Kona Electric",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Electric"
+        },
+        {
+          "name": "Venue N Line",
+          "minPrice": "12.08 Lakh",
+          "priceRange": "12.08 - 13.90 Lakh",
+          "image": "/assets/images/cars/Hyundai.Venue N Line.jpg",
+          "modelName": "Hyundai Venue N Line",
+          "mileage": "18 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "Grand i10 Nios",
+          "minPrice": "5.92 Lakh",
+          "priceRange": "5.92 - 8.56 Lakh",
+          "image": "/assets/images/cars/Hyundai.Grand i10 Nios.jpg",
+          "modelName": "Hyundai Grand i10 Nios",
+          "mileage": "16 to 18 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol / CNG"
+        },
+        {
+          "name": "i20 N-Line",
+          "minPrice": "9.99 Lakh",
+          "priceRange": "9.99 - 12.52 Lakh",
+          "image": "/assets/images/cars/Hyundai.i20 N-Line.jpg",
+          "modelName": "Hyundai i20 N-Line",
+          "mileage": "20 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "IONIQ 5",
+          "minPrice": "46.05 Lakh",
+          "priceRange": "46.05 Lakh",
+          "image": "/assets/images/cars/Hyundai.IONIQ 5.jpg",
+          "modelName": "Hyundai IONIQ 5",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Electric"
+        }],
+      "Mahindra": [{
+        "name": "Thar",
+        "minPrice": "11.35 Lakh",
+        "priceRange": "11.35 - 17.60 Lakh",
+        "image": "/assets/images/cars/Mahindra.Thar.jpg",
+        "modelName": "Mahindra Thar",
+        "mileage": "15.2 kmpl",
+        "seatingCapacity": "4 Seats",
+        "fuelType": "Diesel / Petrol"
+      },
+        {
+          "name": "Scorpio",
+          "minPrice": "13.62 Lakh",
+          "priceRange": "13.62 - 17.42 Lakh",
+          "image": "/assets/images/cars/Mahindra.Scorpio.jpg",
+          "modelName": "Mahindra Scorpio",
+          "mileage": "14.44 kmpl",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Thar ROXX",
+          "minPrice": "12.99 Lakh",
+          "priceRange": "12.99 - 20.49 Lakh",
+          "image": "/assets/images/cars/Mahindra.Thar ROXX.jpg",
+          "modelName": "Mahindra Thar ROXX",
+          "mileage": "12.4 to 15.2 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel / Petrol"
+        },
+        {
+          "name": "XUV700",
+          "minPrice": "13.99 Lakh",
+          "priceRange": "13.99 - 26.04 Lakh",
+          "image": "/assets/images/cars/Mahindra.XUV700.jpg",
+          "modelName": "Mahindra XUV700",
+          "mileage": "17 kmpl",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Diesel / Petrol"
+        },
+        {
+          "name": "Bolero",
+          "minPrice": "9.79 Lakh",
+          "priceRange": "9.79 - 10.91 Lakh",
+          "image": "/assets/images/cars/Mahindra.Bolero.jpg",
+          "modelName": "Mahindra Bolero",
+          "mileage": "16 kmpl",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "XUV 3XO",
+          "minPrice": "7.49 Lakh",
+          "priceRange": "7.49 - 15.49 Lakh",
+          "image": "/assets/images/cars/Mahindra.XUV 3XO.jpg",
+          "modelName": "Mahindra XUV 3XO",
+          "mileage": "20.6 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel / Petrol"
+        },
+        {
+          "name": "Scorpio N",
+          "minPrice": "13.85 Lakh",
+          "priceRange": "13.85 - 24.54 Lakh",
+          "image": "/assets/images/cars/Mahindra.Scorpio N.jpg",
+          "modelName": "Mahindra Scorpio N",
+          "mileage": "12.12 to 15.94 kmpl",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Diesel / Petrol"
+        },
+        {
+          "name": "Bolero Neo",
+          "minPrice": "9.95 Lakh",
+          "priceRange": "9.95 - 12.15 Lakh",
+          "image": "/assets/images/cars/Mahindra.Bolero Neo.jpg",
+          "modelName": "Mahindra Bolero Neo",
+          "mileage": "17.29 kmpl",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "XUV400 EV",
+          "minPrice": "15.49 Lakh",
+          "priceRange": "15.49 - 19.39 Lakh",
+          "image": "/assets/images/cars/Mahindra.XUV400 EV.jpg",
+          "modelName": "Mahindra XUV400 EV",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Electric"
+        },
+        {
+          "name": "Bolero Camper",
+          "minPrice": "10.26 Lakh",
+          "priceRange": "10.26 - 10.61 Lakh",
+          "image": "/assets/images/cars/Mahindra.Bolero Camper.jpg",
+          "modelName": "Mahindra Bolero Camper",
+          "mileage": "16 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Bolero PikUp ExtraLong",
+          "minPrice": "8.85 Lakh",
+          "priceRange": "8.85 - 9.12 Lakh",
+          "image": "/assets/images/cars/Mahindra.Bolero PikUp ExtraLong.jpg",
+          "modelName": "Mahindra Bolero PikUp ExtraLong",
+          "mileage": "14.3 kmpl",
+          "seatingCapacity": "2 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Bolero Maxitruck Plus",
+          "minPrice": "7.49 Lakh",
+          "priceRange": "7.49 - 7.89 Lakh",
+          "image": "/assets/images/cars/Mahindra.Bolero Maxitruck Plus.jpg",
+          "modelName": "Mahindra Bolero Maxitruck Plus",
+          "mileage": "17.2 kmpl",
+          "seatingCapacity": "2 Seats",
+          "fuelType": "Diesel / CNG"
+        },
+        {
+          "name": "Bolero Neo Plus",
+          "minPrice": "11.39 Lakh",
+          "priceRange": "11.39 - 12.49 Lakh",
+          "image": "/assets/images/cars/Mahindra.Bolero Neo Plus.jpg",
+          "modelName": "Mahindra Bolero Neo Plus",
+          "mileage": "",
+          "seatingCapacity": "9 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "BOLERO PikUP ExtraStrong",
+          "minPrice": "8.71 Lakh",
+          "priceRange": "8.71 - 9.39 Lakh",
+          "image": "/assets/images/cars/Mahindra.BOLERO PikUP ExtraStrong.jpg",
+          "modelName": "Mahindra BOLERO PikUP ExtraStrong",
+          "mileage": "",
+          "seatingCapacity": "2 Seats",
+          "fuelType": "Diesel / CNG"
+        }],
+      "Honda": [{
+        "name": "City",
+        "minPrice": "12.08 Lakh",
+        "priceRange": "12.08 - 16.35 Lakh",
+        "image": "/assets/images/cars/Honda.City.jpg",
+        "modelName": "Honda City",
+        "mileage": "17.8 to 18.4 kmpl",
+        "seatingCapacity": "5 Seats",
+        "fuelType": "Petrol"
+      },
+        {
+          "name": "Amaze",
+          "minPrice": "7.20 Lakh",
+          "priceRange": "7.20 - 9.96 Lakh",
+          "image": "/assets/images/cars/Honda.Amaze.jpg",
+          "modelName": "Honda Amaze",
+          "mileage": "18.3 to 18.6 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "City Hybrid",
+          "minPrice": "19 Lakh",
+          "priceRange": "19 - 20.55 Lakh",
+          "image": "/assets/images/cars/Honda.City Hybrid.jpg",
+          "modelName": "Honda City Hybrid",
+          "mileage": "27.13 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "Elevate",
+          "minPrice": "11.91 Lakh",
+          "priceRange": "11.91 - 16.63 Lakh",
+          "image": "/assets/images/cars/Honda.Elevate.jpg",
+          "modelName": "Honda Elevate",
+          "mileage": "15.31 to 16.92 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        }],
+      "MG": [{
+        "name": "Hector",
+        "minPrice": "13.99 Lakh",
+        "priceRange": "13.99 - 22.24 Lakh",
+        "image": "/assets/images/cars/MG.Hector.jpg",
+        "modelName": "MG Hector",
+        "mileage": "15.58 kmpl",
+        "seatingCapacity": "5 Seats",
+        "fuelType": "Diesel / Petrol"
+      },
+        {
+          "name": "Astor",
+          "minPrice": "9.98 Lakh",
+          "priceRange": "9.98 - 18.08 Lakh",
+          "image": "/assets/images/cars/MG.Astor.jpg",
+          "modelName": "MG Astor",
+          "mileage": "15.43 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "Gloster",
+          "minPrice": "38.80 Lakh",
+          "priceRange": "38.80 - 43.87 Lakh",
+          "image": "/assets/images/cars/MG.Gloster.jpg",
+          "modelName": "MG Gloster",
+          "mileage": "",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Comet EV",
+          "minPrice": "6.99 Lakh",
+          "priceRange": "6.99 - 9.53 Lakh",
+          "image": "/assets/images/cars/MG.Comet EV.jpg",
+          "modelName": "MG Comet EV",
+          "mileage": "",
+          "seatingCapacity": "4 Seats",
+          "fuelType": "Electric"
+        },
+        {
+          "name": "Hector Plus",
+          "minPrice": "17.30 Lakh",
+          "priceRange": "17.30 - 23.08 Lakh",
+          "image": "/assets/images/cars/MG.Hector Plus.jpg",
+          "modelName": "MG Hector Plus",
+          "mileage": "12.34 to 15.58 kmpl",
+          "seatingCapacity": "6 Seats",
+          "fuelType": "Diesel / Petrol"
+        },
+        {
+          "name": "ZS EV",
+          "minPrice": "18.98 Lakh",
+          "priceRange": "18.98 - 25.44 Lakh",
+          "image": "/assets/images/cars/MG.ZS EV.jpg",
+          "modelName": "MG ZS EV",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Electric"
+        }],
+      "Skoda": [{
+        "name": "Slavia",
+        "minPrice": "10.69 Lakh",
+        "priceRange": "10.69 - 18.69 Lakh",
+        "image": "/assets/images/cars/Skoda.Slavia.jpg",
+        "modelName": "Skoda Slavia",
+        "mileage": "18.73 to 20.32 kmpl",
+        "seatingCapacity": "5 Seats",
+        "fuelType": "Petrol"
+      },
+        {
+          "name": "Kushaq",
+          "minPrice": "10.89 Lakh",
+          "priceRange": "10.89 - 18.79 Lakh",
+          "image": "/assets/images/cars/Skoda.Kushaq.jpg",
+          "modelName": "Skoda Kushaq",
+          "mileage": "18.09 to 19.76 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "Superb",
+          "minPrice": "54 Lakh",
+          "priceRange": "54 Lakh",
+          "image": "/assets/images/cars/Skoda.Superb.jpg",
+          "modelName": "Skoda Superb",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "Kodiaq",
+          "minPrice": "39.99 Lakh",
+          "priceRange": "39.99 Lakh",
+          "image": "/assets/images/cars/Skoda.Kodiaq.jpg",
+          "modelName": "Skoda Kodiaq",
+          "mileage": "13.32 kmpl",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Petrol"
+        }],
+      "Jeep": [{
+        "name": "Compass",
+        "minPrice": "18.99 Lakh",
+        "priceRange": "18.99 - 32.41 Lakh",
+        "image": "/assets/images/cars/Jeep.Compass.jpg",
+        "modelName": "Jeep Compass",
+        "mileage": "14.9 to 17.1 kmpl",
+        "seatingCapacity": "5 Seats",
+        "fuelType": "Diesel"
+      },
+        {
+          "name": "Wrangler",
+          "minPrice": "67.65 Lakh",
+          "priceRange": "67.65 - 71.65 Lakh",
+          "image": "/assets/images/cars/Jeep.Wrangler.jpg",
+          "modelName": "Jeep Wrangler",
+          "mileage": "10.6 to 11.4 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "Meridian",
+          "minPrice": "31.23 Lakh",
+          "priceRange": "31.23 - 39.83 Lakh",
+          "image": "/assets/images/cars/Jeep.Meridian.jpg",
+          "modelName": "Jeep Meridian",
+          "mileage": "16.2 kmpl",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Grand Cherokee",
+          "minPrice": "80.50 Lakh",
+          "priceRange": "80.50 Lakh",
+          "image": "/assets/images/cars/Jeep.Grand Cherokee.jpg",
+          "modelName": "Jeep Grand Cherokee",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        }],
+      "Renault": [{
+        "name": "KWID",
+        "minPrice": "4.70 Lakh",
+        "priceRange": "4.70 - 6.45 Lakh",
+        "image": "/assets/images/cars/Renault.KWID.jpg",
+        "modelName": "Renault KWID",
+        "mileage": "21.46 to 22.3 kmpl",
+        "seatingCapacity": "5 Seats",
+        "fuelType": "Petrol"
+      },
+        {
+          "name": "Triber",
+          "minPrice": "6 Lakh",
+          "priceRange": "6 - 8.97 Lakh",
+          "image": "/assets/images/cars/Renault.Triber.jpg",
+          "modelName": "Renault Triber",
+          "mileage": "18.2 to 20 kmpl",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "Kiger",
+          "minPrice": "6 Lakh",
+          "priceRange": "6 - 11.23 Lakh",
+          "image": "/assets/images/cars/Renault.Kiger.jpg",
+          "modelName": "Renault Kiger",
+          "mileage": "18.24 to 20.5 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        }],
+      "Nissan": [{
+        "name": "Magnite",
+        "minPrice": "6 Lakh",
+        "priceRange": "6 - 11.27 Lakh",
+        "image": "/assets/images/cars/Nissan.Magnite.jpg",
+        "modelName": "Nissan Magnite",
+        "mileage": "17.4 to 20 kmpl",
+        "seatingCapacity": "5 Seats",
+        "fuelType": "Petrol"
+      },
+        {
+          "name": "X-Trail",
+          "minPrice": "49.92 Lakh",
+          "priceRange": "49.92 Lakh",
+          "image": "/assets/images/cars/Nissan.X-Trail.jpg",
+          "modelName": "Nissan X-Trail",
+          "mileage": "",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Petrol"
+        }],
+      "Volkswagen": [{
+        "name": "Virtus",
+        "minPrice": "11.56 Lakh",
+        "priceRange": "11.56 - 19.41 Lakh",
+        "image": "/assets/images/cars/Volkswagen.Virtus.jpg",
+        "modelName": "Volkswagen Virtus",
+        "mileage": "18.12 to 20.8 kmpl",
+        "seatingCapacity": "5 Seats",
+        "fuelType": "Petrol"
+      },
+        {
+          "name": "Taigun",
+          "minPrice": "11.70 Lakh",
+          "priceRange": "11.70 - 20 Lakh",
+          "image": "/assets/images/cars/Volkswagen.Taigun.jpg",
+          "modelName": "Volkswagen Taigun",
+          "mileage": "18.15 to 19.87 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "Tiguan",
+          "minPrice": "35.17 Lakh",
+          "priceRange": "35.17 Lakh",
+          "image": "/assets/images/cars/Volkswagen.Tiguan.jpg",
+          "modelName": "Volkswagen Tiguan",
+          "mileage": "12.65 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        }],
+      "Citroen": [{
+        "name": "Basalt",
+        "minPrice": "7.99 Lakh",
+        "priceRange": "7.99 - 13.83 Lakh",
+        "image": "/assets/images/cars/Citroen.Basalt.jpg",
+        "modelName": "Citroen Basalt",
+        "mileage": "18 to 19.5 kmpl",
+        "seatingCapacity": "5 Seats",
+        "fuelType": "Petrol"
+      },
+        {
+          "name": "C3",
+          "minPrice": "6.16 Lakh",
+          "priceRange": "6.16 - 9.30 Lakh",
+          "image": "/assets/images/cars/Citroen.C3.jpg",
+          "modelName": "Citroen C3",
+          "mileage": "19.3 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "C3 Aircross",
+          "minPrice": "9.99 Lakh",
+          "priceRange": "9.99 - 14.11 Lakh",
+          "image": "/assets/images/cars/Citroen.C3 Aircross.jpg",
+          "modelName": "Citroen C3 Aircross",
+          "mileage": "17.6 to 18.5 kmpl",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "eC3",
+          "minPrice": "11.61 Lakh",
+          "priceRange": "11.61 - 13.41 Lakh",
+          "image": "/assets/images/cars/Citroen.eC3.jpg",
+          "modelName": "Citroen eC3",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Electric"
+        },
+        {
+          "name": "C5 Aircross",
+          "minPrice": "36.91 Lakh",
+          "priceRange": "36.91 - 37.67 Lakh",
+          "image": "/assets/images/cars/Citroen.C5 Aircross.jpg",
+          "modelName": "Citroen C5 Aircross",
+          "mileage": "17.5 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel"
+        }],
+      "Aston Martin": [{
+        "name": "DB12",
+        "minPrice": "4.59 Cr",
+        "priceRange": "4.59 Cr",
+        "image": "/assets/images/cars/Aston Martin.DB12.jpg",
+        "modelName": "Aston Martin DB12",
+        "mileage": "",
+        "seatingCapacity": "2 Seats",
+        "fuelType": "Petrol"
+      },
+        {
+          "name": "Vantage",
+          "minPrice": "3.99 Cr",
+          "priceRange": "3.99 Cr",
+          "image": "/assets/images/cars/Aston Martin.Vantage.jpg",
+          "modelName": "Aston Martin Vantage",
+          "mileage": "",
+          "seatingCapacity": "2 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "DBX",
+          "minPrice": "3.82 Cr",
+          "priceRange": "3.82 - 4.63 Cr",
+          "image": "/assets/images/cars/Aston Martin.DBX.jpg",
+          "modelName": "Aston Martin DBX",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        }],
+      "Audi": [{
+        "name": "Q5",
+        "minPrice": "65.51 Lakh",
+        "priceRange": "65.51 - 72.30 Lakh",
+        "image": "/assets/images/cars/Audi.Q5.jpg",
+        "modelName": "Audi Q5",
+        "mileage": "13.47 kmpl",
+        "seatingCapacity": "5 Seats",
+        "fuelType": "Petrol"
+      },
+        {
+          "name": "Q3",
+          "minPrice": "44.25 Lakh",
+          "priceRange": "44.25 - 54.65 Lakh",
+          "image": "/assets/images/cars/Audi.Q3.jpg",
+          "modelName": "Audi Q3",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "Q7",
+          "minPrice": "88.66 Lakh",
+          "priceRange": "88.66 - 97.84 Lakh",
+          "image": "/assets/images/cars/Audi.Q7.jpg",
+          "modelName": "Audi Q7",
+          "mileage": "11.21 kmpl",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "A4",
+          "minPrice": "46.02 Lakh",
+          "priceRange": "46.02 - 54.58 Lakh",
+          "image": "/assets/images/cars/Audi.A4.jpg",
+          "modelName": "Audi A4",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "A6",
+          "minPrice": "64.41 Lakh",
+          "priceRange": "64.41 - 70.79 Lakh",
+          "image": "/assets/images/cars/Audi.A6.jpg",
+          "modelName": "Audi A6",
+          "mileage": "14.11 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "Q8",
+          "minPrice": "1.17 Cr",
+          "priceRange": "1.17 Cr",
+          "image": "/assets/images/cars/Audi.Q8.jpg",
+          "modelName": "Audi Q8",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "RS5",
+          "minPrice": "1.13 Cr",
+          "priceRange": "1.13 Cr",
+          "image": "/assets/images/cars/Audi.RS5.jpg",
+          "modelName": "Audi RS5",
+          "mileage": "8.8 kmpl",
+          "seatingCapacity": "4 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "e-tron",
+          "minPrice": "1.02 Cr",
+          "priceRange": "1.02 - 1.26 Cr",
+          "image": "/assets/images/cars/Audi.e-tron.jpg",
+          "modelName": "Audi e-tron",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Electric"
+        },
+        {
+          "name": "e-tron GT",
+          "minPrice": "1.72 Cr",
+          "priceRange": "1.72 Cr",
+          "image": "/assets/images/cars/Audi.e-tron GT.jpg",
+          "modelName": "Audi e-tron GT",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Electric"
+        },
+        {
+          "name": "RS e-tron GT",
+          "minPrice": "1.95 Cr",
+          "priceRange": "1.95 Cr",
+          "image": "/assets/images/cars/Audi.RS e-tron GT.jpg",
+          "modelName": "Audi RS e-tron GT",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Electric"
+        },
+        {
+          "name": "A8 L",
+          "minPrice": "1.34 Cr",
+          "priceRange": "1.34 - 1.63 Cr",
+          "image": "/assets/images/cars/Audi.A8 L.jpg",
+          "modelName": "Audi A8 L",
+          "mileage": "",
+          "seatingCapacity": "4 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "Q3 Sportback",
+          "minPrice": "54.76 Lakh",
+          "priceRange": "54.76 - 55.71 Lakh",
+          "image": "/assets/images/cars/Audi.Q3 Sportback.jpg",
+          "modelName": "Audi Q3 Sportback",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "Q8 e-tron",
+          "minPrice": "1.15 Cr",
+          "priceRange": "1.15 - 1.27 Cr",
+          "image": "/assets/images/cars/Audi.Q8 e-tron.jpg",
+          "modelName": "Audi Q8 e-tron",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Electric"
+        },
+        {
+          "name": "Q8 Sportback e-tron",
+          "minPrice": "1.19 Cr",
+          "priceRange": "1.19 - 1.32 Cr",
+          "image": "/assets/images/cars/Audi.Q8 Sportback e-tron.jpg",
+          "modelName": "Audi Q8 Sportback e-tron",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Electric"
+        },
+        {
+          "name": "RS Q8",
+          "minPrice": "2.22 Cr",
+          "priceRange": "2.22 Cr",
+          "image": "/assets/images/cars/Audi.RS Q8.jpg",
+          "modelName": "Audi RS Q8",
+          "mileage": "8.26 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "S5 Sportback",
+          "minPrice": "77.32 Lakh",
+          "priceRange": "77.32 - 83.15 Lakh",
+          "image": "/assets/images/cars/Audi.S5 Sportback.jpg",
+          "modelName": "Audi S5 Sportback",
+          "mileage": "10.6 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        }],
+      "Bajaj": [{
+        "name": "Qute (RE60)",
+        "minPrice": "3.61 Lakh",
+        "priceRange": "3.61 Lakh",
+        "image": "/assets/images/cars/Bajaj.Qute (RE60).jpg",
+        "modelName": "Bajaj Qute (RE60)",
+        "mileage": "",
+        "seatingCapacity": "4 Seats",
+        "fuelType": "CNG"
+      }],
+      "Bentley": [{
+        "name": "Continental",
+        "minPrice": "5.23 Cr",
+        "priceRange": "5.23 - 8.45 Cr",
+        "image": "/assets/images/cars/Bentley.Continental.jpg",
+        "modelName": "Bentley Continental",
+        "mileage": "12.9 kmpl",
+        "seatingCapacity": "4 Seats",
+        "fuelType": "Petrol"
+      },
+        {
+          "name": "Flying Spur",
+          "minPrice": "5.25 Cr",
+          "priceRange": "5.25 - 7.60 Cr",
+          "image": "/assets/images/cars/Bentley.Flying Spur.jpg",
+          "modelName": "Bentley Flying Spur",
+          "mileage": "10.2 to 12.5 kmpl",
+          "seatingCapacity": "4 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "Bentayga",
+          "minPrice": "5 Cr",
+          "priceRange": "5 - 6.75 Cr",
+          "image": "/assets/images/cars/Bentley.Bentayga.jpg",
+          "modelName": "Bentley Bentayga",
+          "mileage": "8.6 kmpl",
+          "seatingCapacity": "4 Seats",
+          "fuelType": "Petrol"
+        }],
+      "BMW": [{
+        "name": "X1",
+        "minPrice": "49.50 Lakh",
+        "priceRange": "49.50 - 52.50 Lakh",
+        "image": "/assets/images/cars/BMW.X1.jpg",
+        "modelName": "BMW X1",
+        "mileage": "20.37 kmpl",
+        "seatingCapacity": "5 Seats",
+        "fuelType": "Diesel / Petrol"
+      },
+        {
+          "name": "X7",
+          "minPrice": "1.27 Cr",
+          "priceRange": "1.27 - 1.30 Cr",
+          "image": "/assets/images/cars/BMW.X7.jpg",
+          "modelName": "BMW X7",
+          "mileage": "11.29 to 14.31 kmpl",
+          "seatingCapacity": "6 Seats",
+          "fuelType": "Diesel / Petrol"
+        },
+        {
+          "name": "X5",
+          "minPrice": "96 Lakh",
+          "priceRange": "96 Lakh - 1.09 Cr",
+          "image": "/assets/images/cars/BMW.X5.jpg",
+          "modelName": "BMW X5",
+          "mileage": "12 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel / Petrol"
+        },
+        {
+          "name": "i7",
+          "minPrice": "2.03 Cr",
+          "priceRange": "2.03 - 2.50 Cr",
+          "image": "/assets/images/cars/BMW.i7.jpg",
+          "modelName": "BMW i7",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Electric"
+        },
+        {
+          "name": "Z4",
+          "minPrice": "90.90 Lakh",
+          "priceRange": "90.90 Lakh",
+          "image": "/assets/images/cars/BMW.Z4.jpg",
+          "modelName": "BMW Z4",
+          "mileage": "",
+          "seatingCapacity": "2 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "3 Series",
+          "minPrice": "72.90 Lakh",
+          "priceRange": "72.90 Lakh",
+          "image": "/assets/images/cars/BMW.3 Series.jpg",
+          "modelName": "BMW 3 Series",
+          "mileage": "13.02 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "X3",
+          "minPrice": "68.50 Lakh",
+          "priceRange": "68.50 - 87.70 Lakh",
+          "image": "/assets/images/cars/BMW.X3.jpg",
+          "modelName": "BMW X3",
+          "mileage": "16.35 to 16.55 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel / Petrol"
+        },
+        {
+          "name": "5 Series",
+          "minPrice": "72.90 Lakh",
+          "priceRange": "72.90 Lakh",
+          "image": "/assets/images/cars/BMW.5 Series.jpg",
+          "modelName": "BMW 5 Series",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "XM",
+          "minPrice": "2.60 Cr",
+          "priceRange": "2.60 Cr",
+          "image": "/assets/images/cars/BMW.XM.jpg",
+          "modelName": "BMW XM",
+          "mileage": "61.9 kmpl",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "iX",
+          "minPrice": "1.40 Cr",
+          "priceRange": "1.40 Cr",
+          "image": "/assets/images/cars/BMW.iX.jpg",
+          "modelName": "BMW iX",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Electric"
+        },
+        {
+          "name": "M2",
+          "minPrice": "99.90 Lakh",
+          "priceRange": "99.90 Lakh",
+          "image": "/assets/images/cars/BMW.M2.jpg",
+          "modelName": "BMW M2",
+          "mileage": "10.13 kmpl",
+          "seatingCapacity": "4 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "7 Series",
+          "minPrice": "1.81 Cr",
+          "priceRange": "1.81 - 1.84 Cr",
+          "image": "/assets/images/cars/BMW.7 Series.jpg",
+          "modelName": "BMW 7 Series",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel / Petrol"
+        },
+        {
+          "name": "2 Series",
+          "minPrice": "43.90 Lakh",
+          "priceRange": "43.90 - 46.90 Lakh",
+          "image": "/assets/images/cars/BMW.2 Series.jpg",
+          "modelName": "BMW 2 Series",
+          "mileage": "14.82 to 18.64 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel / Petrol"
+        },
+        {
+          "name": "X4",
+          "minPrice": "96.20 Lakh",
+          "priceRange": "96.20 Lakh",
+          "image": "/assets/images/cars/BMW.X4.jpg",
+          "modelName": "BMW X4",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "6 Series",
+          "minPrice": "73.50 Lakh",
+          "priceRange": "73.50 - 78.90 Lakh",
+          "image": "/assets/images/cars/BMW.6 Series.jpg",
+          "modelName": "BMW 6 Series",
+          "mileage": "13.32 to 18.65 kmpl",
+          "seatingCapacity": "4 Seats",
+          "fuelType": "Diesel / Petrol"
+        },
+        {
+          "name": "iX1",
+          "minPrice": "66.90 Lakh",
+          "priceRange": "66.90 Lakh",
+          "image": "/assets/images/cars/BMW.iX1.jpg",
+          "modelName": "BMW iX1",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Electric"
+        },
+        {
+          "name": "M4 Competition",
+          "minPrice": "1.53 Cr",
+          "priceRange": "1.53 Cr",
+          "image": "/assets/images/cars/BMW.M4 Competition.jpg",
+          "modelName": "BMW M4 Competition",
+          "mileage": "9.7 kmpl",
+          "seatingCapacity": "4 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "i5",
+          "minPrice": "1.20 Cr",
+          "priceRange": "1.20 Cr",
+          "image": "/assets/images/cars/BMW.i5.jpg",
+          "modelName": "BMW i5",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Electric"
+        },
+        {
+          "name": "3 Series Gran Limousine",
+          "minPrice": "60.60 Lakh",
+          "priceRange": "60.60 - 65 Lakh",
+          "image": "/assets/images/cars/BMW.3 Series Gran Limousine.jpg",
+          "modelName": "BMW 3 Series Gran Limousine",
+          "mileage": "15.39 to 19.61 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel / Petrol"
+        },
+        {
+          "name": "i4",
+          "minPrice": "72.50 Lakh",
+          "priceRange": "72.50 - 77.50 Lakh",
+          "image": "/assets/images/cars/BMW.i4.jpg",
+          "modelName": "BMW i4",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Electric"
+        },
+        {
+          "name": "M8 Coupe Competition",
+          "minPrice": "2.44 Cr",
+          "priceRange": "2.44 Cr",
+          "image": "/assets/images/cars/BMW.M8 Coupe Competition.jpg",
+          "modelName": "BMW M8 Coupe Competition",
+          "mileage": "8.7 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        }],
+      "BYD": [{
+        "name": "Seal",
+        "minPrice": "41 Lakh",
+        "priceRange": "41 - 53 Lakh",
+        "image": "/assets/images/cars/BYD.Seal.jpg",
+        "modelName": "BYD Seal",
+        "mileage": "",
+        "seatingCapacity": "5 Seats",
+        "fuelType": "Electric"
+      },
+        {
+          "name": "Atto 3",
+          "minPrice": "24.99 Lakh",
+          "priceRange": "24.99 - 33.99 Lakh",
+          "image": "/assets/images/cars/BYD.Atto 3.jpg",
+          "modelName": "BYD Atto 3",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Electric"
+        },
+        {
+          "name": "E6",
+          "minPrice": "29.15 Lakh",
+          "priceRange": "29.15 Lakh",
+          "image": "/assets/images/cars/BYD.E6.jpg",
+          "modelName": "BYD E6",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Electric"
+        }],
+      "Ferrari": null,
+      "Force": [{
+        "name": "Gurkha",
+        "minPrice": "16.75 Lakh",
+        "priceRange": "16.75 Lakh",
+        "image": "/assets/images/cars/Force.Gurkha.jpg",
+        "modelName": "Force Gurkha",
+        "mileage": "",
+        "seatingCapacity": "4 Seats",
+        "fuelType": "Diesel"
+      },
+        {
+          "name": "Urbania",
+          "minPrice": "30.51 Lakh",
+          "priceRange": "30.51 - 36.84 Lakh",
+          "image": "/assets/images/cars/Force.Urbania.jpg",
+          "modelName": "Force Urbania",
+          "mileage": "",
+          "seatingCapacity": "13 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Gurkha 5 Door",
+          "minPrice": "18 Lakh",
+          "priceRange": "18 Lakh",
+          "image": "/assets/images/cars/Force.Gurkha 5 Door.jpg",
+          "modelName": "Force Gurkha 5 Door",
+          "mileage": "",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Diesel"
+        }],
+      "Ford": [{
+        "name": "Aspire",
+        "minPrice": "9.10 Lakh",
+        "priceRange": "9.10 Lakh",
+        "image": "/assets/images/cars/Ford.Aspire.jpg",
+        "modelName": "Ford Aspire",
+        "mileage": "16.3 kmpl",
+        "seatingCapacity": "5 Seats",
+        "fuelType": "Petrol"
+      },
+        {
+          "name": "Aspire 2018",
+          "minPrice": "6 Lakh",
+          "priceRange": "6 Lakh",
+          "image": "/assets/images/cars/Ford.Aspire 2018.jpg",
+          "modelName": "Ford Aspire 2018",
+          "mileage": "",
+          "seatingCapacity": null,
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "EcoSport 2013-2015",
+          "minPrice": "10.20 Lakh",
+          "priceRange": "10.20 Lakh",
+          "image": "/assets/images/cars/Ford.EcoSport 2013-2015.jpg",
+          "modelName": "Ford EcoSport 2013-2015",
+          "mileage": "22.7 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "EcoSport 2015-2021",
+          "minPrice": "11.49 Lakh",
+          "priceRange": "11.49 Lakh",
+          "image": "/assets/images/cars/Ford.EcoSport 2015-2021.jpg",
+          "modelName": "Ford EcoSport 2015-2021",
+          "mileage": "21.7 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "EcoSport",
+          "minPrice": "11.69 Lakh",
+          "priceRange": "11.69 Lakh",
+          "image": "/assets/images/cars/Ford.EcoSport.jpg",
+          "modelName": "Ford EcoSport",
+          "mileage": "21.7 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Endeavour 2003-2007",
+          "minPrice": "22.05 Lakh",
+          "priceRange": "22.05 Lakh",
+          "image": "/assets/images/cars/Ford.Endeavour 2003-2007.jpg",
+          "modelName": "Ford Endeavour 2003-2007",
+          "mileage": "11.4 kmpl",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Endeavour 2007-2009",
+          "minPrice": "22.05 Lakh",
+          "priceRange": "22.05 Lakh",
+          "image": "/assets/images/cars/Ford.Endeavour 2007-2009.jpg",
+          "modelName": "Ford Endeavour 2007-2009",
+          "mileage": "11.4 kmpl",
+          "seatingCapacity": null,
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Endeavour 2009-2014",
+          "minPrice": "22.05 Lakh",
+          "priceRange": "22.05 Lakh",
+          "image": "/assets/images/cars/Ford.Endeavour 2009-2014.jpg",
+          "modelName": "Ford Endeavour 2009-2014",
+          "mileage": "11.4 kmpl",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Endeavour 2014-2015",
+          "minPrice": "25.67 Lakh",
+          "priceRange": "25.67 Lakh",
+          "image": "/assets/images/cars/Ford.Endeavour 2014-2015.jpg",
+          "modelName": "Ford Endeavour 2014-2015",
+          "mileage": "11.4 kmpl",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Endeavour 2015-2020",
+          "minPrice": "34.70 Lakh",
+          "priceRange": "34.70 Lakh",
+          "image": "/assets/images/cars/Ford.Endeavour 2015-2020.jpg",
+          "modelName": "Ford Endeavour 2015-2020",
+          "mileage": "14.2 kmpl",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Endeavour 2020-2022",
+          "minPrice": "36.27 Lakh",
+          "priceRange": "36.27 Lakh",
+          "image": "/assets/images/cars/Ford.Endeavour 2020-2022.jpg",
+          "modelName": "Ford Endeavour 2020-2022",
+          "mileage": "13.9 kmpl",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Escort",
+          "minPrice": "9 Lakh",
+          "priceRange": "9 Lakh",
+          "image": "/assets/images/cars/Ford.Escort.jpg",
+          "modelName": "Ford Escort",
+          "mileage": "13.6 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Falcon",
+          "minPrice": "2 Lakh",
+          "priceRange": "2 Lakh",
+          "image": "/assets/images/cars/Ford.Falcon.jpg",
+          "modelName": "Ford Falcon",
+          "mileage": "14 kmpl",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "Fiesta",
+          "minPrice": "10.19 Lakh",
+          "priceRange": "10.19 Lakh",
+          "image": "/assets/images/cars/Ford.Fiesta.jpg",
+          "modelName": "Ford Fiesta",
+          "mileage": "25.01 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Fiesta 2004-2008",
+          "minPrice": "8.52 Lakh",
+          "priceRange": "8.52 Lakh",
+          "image": "/assets/images/cars/Ford.Fiesta 2004-2008.jpg",
+          "modelName": "Ford Fiesta 2004-2008",
+          "mileage": "17.8 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Fiesta 2008-2011",
+          "minPrice": "8.52 Lakh",
+          "priceRange": "8.52 Lakh",
+          "image": "/assets/images/cars/Ford.Fiesta 2008-2011.jpg",
+          "modelName": "Ford Fiesta 2008-2011",
+          "mileage": "17.8 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Fiesta 2011-2013",
+          "minPrice": "9.99 Lakh",
+          "priceRange": "9.99 Lakh",
+          "image": "/assets/images/cars/Ford.Fiesta 2011-2013.jpg",
+          "modelName": "Ford Fiesta 2011-2013",
+          "mileage": "23.5 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Fiesta Classic",
+          "minPrice": "7.68 Lakh",
+          "priceRange": "7.68 Lakh",
+          "image": "/assets/images/cars/Ford.Fiesta Classic.jpg",
+          "modelName": "Ford Fiesta Classic",
+          "mileage": "19.68 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Fiesta Classic 2011-2012",
+          "minPrice": "8.48 Lakh",
+          "priceRange": "8.48 Lakh",
+          "image": "/assets/images/cars/Ford.Fiesta Classic 2011-2012.jpg",
+          "modelName": "Ford Fiesta Classic 2011-2012",
+          "mileage": "17.8 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Figo 2010 2012",
+          "minPrice": "5.94 Lakh",
+          "priceRange": "5.94 Lakh",
+          "image": "/assets/images/cars/Ford.Figo 2010 2012.jpg",
+          "modelName": "Ford Figo 2010 2012",
+          "mileage": "20 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Figo 2012-2015",
+          "minPrice": "6.36 Lakh",
+          "priceRange": "6.36 Lakh",
+          "image": "/assets/images/cars/Ford.Figo 2012-2015.jpg",
+          "modelName": "Ford Figo 2012-2015",
+          "mileage": "20 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Figo 2015-2019",
+          "minPrice": "8.49 Lakh",
+          "priceRange": "8.49 Lakh",
+          "image": "/assets/images/cars/Ford.Figo 2015-2019.jpg",
+          "modelName": "Ford Figo 2015-2019",
+          "mileage": "17.01 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "Figo",
+          "minPrice": "8.37 Lakh",
+          "priceRange": "8.37 Lakh",
+          "image": "/assets/images/cars/Ford.Figo.jpg",
+          "modelName": "Ford Figo",
+          "mileage": "24.4 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Freestyle",
+          "minPrice": "9.03 Lakh",
+          "priceRange": "9.03 Lakh",
+          "image": "/assets/images/cars/Ford.Freestyle.jpg",
+          "modelName": "Ford Freestyle",
+          "mileage": "23.8 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Fusion",
+          "minPrice": "6.83 Lakh",
+          "priceRange": "6.83 Lakh",
+          "image": "/assets/images/cars/Ford.Fusion.jpg",
+          "modelName": "Ford Fusion",
+          "mileage": "17.7 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Ikon",
+          "minPrice": "5.76 Lakh",
+          "priceRange": "5.76 Lakh",
+          "image": "/assets/images/cars/Ford.Ikon.jpg",
+          "modelName": "Ford Ikon",
+          "mileage": "13.8 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Mondeo 2001-2006",
+          "minPrice": "15 Lakh",
+          "priceRange": "15 Lakh",
+          "image": "/assets/images/cars/Ford.Mondeo 2001-2006.jpg",
+          "modelName": "Ford Mondeo 2001-2006",
+          "mileage": "13 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Mustang 2016-2020",
+          "minPrice": "74.62 Lakh",
+          "priceRange": "74.62 Lakh",
+          "image": "/assets/images/cars/Ford.Mustang 2016-2020.jpg",
+          "modelName": "Ford Mustang 2016-2020",
+          "mileage": "13 kmpl",
+          "seatingCapacity": "4 Seats",
+          "fuelType": "Petrol"
+        }],
+      "Isuzu": [{
+        "name": "D-Max",
+        "minPrice": "11.55 Lakh",
+        "priceRange": "11.55 - 12.40 Lakh",
+        "image": "/assets/images/cars/Isuzu.D-Max.jpg",
+        "modelName": "Isuzu D-Max",
+        "mileage": "",
+        "seatingCapacity": "2 Seats",
+        "fuelType": "Diesel"
+      },
+        {
+          "name": "V-Cross",
+          "minPrice": "25.52 Lakh",
+          "priceRange": "25.52 - 30.96 Lakh",
+          "image": "/assets/images/cars/Isuzu.V-Cross.jpg",
+          "modelName": "Isuzu V-Cross",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "MU-X",
+          "minPrice": "37 Lakh",
+          "priceRange": "37 - 40.40 Lakh",
+          "image": "/assets/images/cars/Isuzu.MU-X.jpg",
+          "modelName": "Isuzu MU-X",
+          "mileage": "12.31 to 13 kmpl",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "S-CAB Z",
+          "minPrice": "15.80 Lakh",
+          "priceRange": "15.80 Lakh",
+          "image": "/assets/images/cars/Isuzu.S-CAB Z.jpg",
+          "modelName": "Isuzu S-CAB Z",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "S-CAB",
+          "minPrice": "13.85 Lakh",
+          "priceRange": "13.85 Lakh",
+          "image": "/assets/images/cars/Isuzu.S-CAB.jpg",
+          "modelName": "Isuzu S-CAB",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "Hi-Lander",
+          "minPrice": "21.20 Lakh",
+          "priceRange": "21.20 Lakh",
+          "image": "/assets/images/cars/Isuzu.Hi-Lander.jpg",
+          "modelName": "Isuzu Hi-Lander",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel"
+        }],
+      "Jaguar": [{
+        "name": "F-Pace",
+        "minPrice": "72.90 Lakh",
+        "priceRange": "72.90 Lakh",
+        "image": "/assets/images/cars/Jaguar.F-Pace.jpg",
+        "modelName": "Jaguar F-Pace",
+        "mileage": "19.3 kmpl",
+        "seatingCapacity": "5 Seats",
+        "fuelType": "Diesel / Petrol"
+      },
+        {
+          "name": "F-TYPE",
+          "minPrice": "1 Cr",
+          "priceRange": "1 - 1.56 Cr",
+          "image": "/assets/images/cars/Jaguar.F-TYPE.jpg",
+          "modelName": "Jaguar F-TYPE",
+          "mileage": "",
+          "seatingCapacity": "2 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "I-Pace",
+          "minPrice": "1.26 Cr",
+          "priceRange": "1.26 Cr",
+          "image": "/assets/images/cars/Jaguar.I-Pace.jpg",
+          "modelName": "Jaguar I-Pace",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Electric"
+        }],
+      "Lamborghini": [{
+        "name": "Urus",
+        "minPrice": "4.18 Cr",
+        "priceRange": "4.18 - 4.57 Cr",
+        "image": "/assets/images/cars/Lamborghini.Urus.jpg",
+        "modelName": "Lamborghini Urus",
+        "mileage": "",
+        "seatingCapacity": "5 Seats",
+        "fuelType": "Petrol"
+      },
+        {
+          "name": "Revuelto",
+          "minPrice": "8.89 Cr",
+          "priceRange": "8.89 Cr",
+          "image": "/assets/images/cars/Lamborghini.Revuelto.jpg",
+          "modelName": "Lamborghini Revuelto",
+          "mileage": "",
+          "seatingCapacity": "2 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "Huracan EVO",
+          "minPrice": "4 Cr",
+          "priceRange": "4 - 4.99 Cr",
+          "image": "/assets/images/cars/Lamborghini.Huracan EVO.jpg",
+          "modelName": "Lamborghini Huracan EVO",
+          "mileage": "",
+          "seatingCapacity": "2 Seats",
+          "fuelType": "Petrol"
+        }],
+      "Land Rover": [{
+        "name": "Defender",
+        "minPrice": "97 Lakh",
+        "priceRange": "97 Lakh - 2.85 Cr",
+        "image": "/assets/images/cars/Land Rover.Defender.jpg",
+        "modelName": "Land Rover Defender",
+        "mileage": "14.01 kmpl",
+        "seatingCapacity": "5 Seats",
+        "fuelType": "Diesel / Petrol"
+      },
+        {
+          "name": "Range Rover",
+          "minPrice": "2.36 Cr",
+          "priceRange": "2.36 - 2.60 Cr",
+          "image": "/assets/images/cars/Land Rover.Range Rover.jpg",
+          "modelName": "Land Rover Range Rover",
+          "mileage": "10.42 to 13.16 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel / Petrol"
+        },
+        {
+          "name": "Range Rover Velar",
+          "minPrice": "87.90 Lakh",
+          "priceRange": "87.90 Lakh",
+          "image": "/assets/images/cars/Land Rover.Range Rover Velar.jpg",
+          "modelName": "Land Rover Range Rover Velar",
+          "mileage": "15.8 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel / Petrol"
+        },
+        {
+          "name": "Range Rover Evoque",
+          "minPrice": "67.90 Lakh",
+          "priceRange": "67.90 Lakh",
+          "image": "/assets/images/cars/Land Rover.Range Rover Evoque.jpg",
+          "modelName": "Land Rover Range Rover Evoque",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel / Petrol"
+        },
+        {
+          "name": "Range Rover Sport",
+          "minPrice": "1.40 Cr",
+          "priceRange": "1.40 Cr",
+          "image": "/assets/images/cars/Land Rover.Range Rover Sport.jpg",
+          "modelName": "Land Rover Range Rover Sport",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel / Petrol"
+        },
+        {
+          "name": "Discovery",
+          "minPrice": "97 Lakh",
+          "priceRange": "97 Lakh - 1.43 Cr",
+          "image": "/assets/images/cars/Land Rover.Discovery.jpg",
+          "modelName": "Land Rover Discovery",
+          "mileage": "12.37 kmpl",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Diesel / Petrol"
+        },
+        {
+          "name": "Discovery Sport",
+          "minPrice": "67.90 Lakh",
+          "priceRange": "67.90 Lakh",
+          "image": "/assets/images/cars/Land Rover.Discovery Sport.jpg",
+          "modelName": "Land Rover Discovery Sport",
+          "mileage": "19.4 kmpl",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Diesel / Petrol"
+        }],
+      "Lexus": [{
+        "name": "LM",
+        "minPrice": "2 Cr",
+        "priceRange": "2 - 2.50 Cr",
+        "image": "/assets/images/cars/Lexus.LM.jpg",
+        "modelName": "Lexus LM",
+        "mileage": "",
+        "seatingCapacity": "4 Seats",
+        "fuelType": "Petrol"
+      },
+        {
+          "name": "ES",
+          "minPrice": "63.10 Lakh",
+          "priceRange": "63.10 - 69.70 Lakh",
+          "image": "/assets/images/cars/Lexus.ES.jpg",
+          "modelName": "Lexus ES",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "LC 500h",
+          "minPrice": "2.39 Cr",
+          "priceRange": "2.39 - 2.50 Cr",
+          "image": "/assets/images/cars/Lexus.LC 500h.jpg",
+          "modelName": "Lexus LC 500h",
+          "mileage": "12.3 kmpl",
+          "seatingCapacity": "4 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "LS",
+          "minPrice": "1.96 Cr",
+          "priceRange": "1.96 - 2.27 Cr",
+          "image": "/assets/images/cars/Lexus.LS.jpg",
+          "modelName": "Lexus LS",
+          "mileage": "15.4 kmpl",
+          "seatingCapacity": "4 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "LX",
+          "minPrice": "2.84 Cr",
+          "priceRange": "2.84 Cr",
+          "image": "/assets/images/cars/Lexus.LX.jpg",
+          "modelName": "Lexus LX",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel"
+        },
+        {
+          "name": "NX",
+          "minPrice": "67.35 Lakh",
+          "priceRange": "67.35 - 74.24 Lakh",
+          "image": "/assets/images/cars/Lexus.NX.jpg",
+          "modelName": "Lexus NX",
+          "mileage": "9.5 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "RX",
+          "minPrice": "95.80 Lakh",
+          "priceRange": "95.80 Lakh - 1.20 Cr",
+          "image": "/assets/images/cars/Lexus.RX.jpg",
+          "modelName": "Lexus RX",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        }],
+      "Lotus": null,
+      "Maserati": [{
+        "name": "GranTurismo",
+        "minPrice": "2.25 Cr",
+        "priceRange": "2.25 - 2.51 Cr",
+        "image": "/assets/images/cars/Maserati.GranTurismo.jpg",
+        "modelName": "Maserati GranTurismo",
+        "mileage": "10 kmpl",
+        "seatingCapacity": "4 Seats",
+        "fuelType": "Diesel / Petrol"
+      },
+        {
+          "name": "Levante",
+          "minPrice": "1.49 Cr",
+          "priceRange": "1.49 - 1.64 Cr",
+          "image": "/assets/images/cars/Maserati.Levante.jpg",
+          "modelName": "Maserati Levante",
+          "mileage": "12 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel / Petrol"
+        },
+        {
+          "name": "Ghibli",
+          "minPrice": "1.15 Cr",
+          "priceRange": "1.15 - 1.93 Cr",
+          "image": "/assets/images/cars/Maserati.Ghibli.jpg",
+          "modelName": "Maserati Ghibli",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "Grecale",
+          "minPrice": "1.31 Cr",
+          "priceRange": "1.31 - 2.05 Cr",
+          "image": "/assets/images/cars/Maserati.Grecale.jpg",
+          "modelName": "Maserati Grecale",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "Quattroporte",
+          "minPrice": "1.71 Cr",
+          "priceRange": "1.71 - 2.12 Cr",
+          "image": "/assets/images/cars/Maserati.Quattroporte.jpg",
+          "modelName": "Maserati Quattroporte",
+          "mileage": "11.76 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel / Petrol"
+        },
+        {
+          "name": "GranCabrio",
+          "minPrice": "2.46 Cr",
+          "priceRange": "2.46 - 2.69 Cr",
+          "image": "/assets/images/cars/Maserati.GranCabrio.jpg",
+          "modelName": "Maserati GranCabrio",
+          "mileage": "10.2 kmpl",
+          "seatingCapacity": "4 Seats",
+          "fuelType": "Diesel / Petrol"
+        }],
+      "Mclaren": null,
+      "Mercedes-Benz": [{
+        "name": "GLA",
+        "minPrice": "51.75 Lakh",
+        "priceRange": "51.75 - 58.15 Lakh",
+        "image": "/assets/images/cars/Mercedes-Benz.GLA.jpg",
+        "modelName": "Mercedes-Benz GLA",
+        "mileage": "17.4 to 18.9 kmpl",
+        "seatingCapacity": "5 Seats",
+        "fuelType": "Diesel / Petrol"
+      },
+        {
+          "name": "C-Class",
+          "minPrice": "61.85 Lakh",
+          "priceRange": "61.85 - 69 Lakh",
+          "image": "/assets/images/cars/Mercedes-Benz.C-Class.jpg",
+          "modelName": "Mercedes-Benz C-Class",
+          "mileage": "23 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel / Petrol"
+        },
+        {
+          "name": "Maybach GLS",
+          "minPrice": "3.35 Cr",
+          "priceRange": "3.35 Cr",
+          "image": "/assets/images/cars/Mercedes-Benz.Maybach GLS.jpg",
+          "modelName": "Mercedes-Benz Maybach GLS",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "E-Class",
+          "minPrice": "76.05 Lakh",
+          "priceRange": "76.05 - 89.15 Lakh",
+          "image": "/assets/images/cars/Mercedes-Benz.E-Class.jpg",
+          "modelName": "Mercedes-Benz E-Class",
+          "mileage": "16.1 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel / Petrol"
+        },
+        {
+          "name": "GLS",
+          "minPrice": "1.32 Cr",
+          "priceRange": "1.32 - 1.37 Cr",
+          "image": "/assets/images/cars/Mercedes-Benz.GLS.jpg",
+          "modelName": "Mercedes-Benz GLS",
+          "mileage": "",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Diesel / Petrol"
+        },
+        {
+          "name": "GLC",
+          "minPrice": "75.90 Lakh",
+          "priceRange": "75.90 - 76.90 Lakh",
+          "image": "/assets/images/cars/Mercedes-Benz.GLC.jpg",
+          "modelName": "Mercedes-Benz GLC",
+          "mileage": "14.7 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel / Petrol"
+        },
+        {
+          "name": "S-Class",
+          "minPrice": "1.77 Cr",
+          "priceRange": "1.77 - 1.86 Cr",
+          "image": "/assets/images/cars/Mercedes-Benz.S-Class.jpg",
+          "modelName": "Mercedes-Benz S-Class",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel / Petrol"
+        },
+        {
+          "name": "EQS",
+          "minPrice": "1.62 Cr",
+          "priceRange": "1.62 Cr",
+          "image": "/assets/images/cars/Mercedes-Benz.EQS.jpg",
+          "modelName": "Mercedes-Benz EQS",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Electric"
+        },
+        {
+          "name": "Maybach EQS",
+          "minPrice": "2.25 Cr",
+          "priceRange": "2.25 Cr",
+          "image": "/assets/images/cars/Mercedes-Benz.Maybach EQS.jpg",
+          "modelName": "Mercedes-Benz Maybach EQS",
+          "mileage": "",
+          "seatingCapacity": "4 Seats",
+          "fuelType": "Electric"
+        },
+        {
+          "name": "GLE",
+          "minPrice": "97.85 Lakh",
+          "priceRange": "97.85 Lakh - 1.15 Cr",
+          "image": "/assets/images/cars/Mercedes-Benz.GLE.jpg",
+          "modelName": "Mercedes-Benz GLE",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel / Petrol"
+        },
+        {
+          "name": "EQB",
+          "minPrice": "70.90 Lakh",
+          "priceRange": "70.90 - 77.50 Lakh",
+          "image": "/assets/images/cars/Mercedes-Benz.EQB.jpg",
+          "modelName": "Mercedes-Benz EQB",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Electric"
+        },
+        {
+          "name": "EQE SUV",
+          "minPrice": "1.39 Cr",
+          "priceRange": "1.39 Cr",
+          "image": "/assets/images/cars/Mercedes-Benz.EQE SUV.jpg",
+          "modelName": "Mercedes-Benz EQE SUV",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Electric"
+        },
+        {
+          "name": "AMG C43",
+          "minPrice": "98.25 Lakh",
+          "priceRange": "98.25 Lakh",
+          "image": "/assets/images/cars/Mercedes-Benz.AMG C43.jpg",
+          "modelName": "Mercedes-Benz AMG C43",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "AMG GLC 43",
+          "minPrice": "1.10 Cr",
+          "priceRange": "1.10 Cr",
+          "image": "/assets/images/cars/Mercedes-Benz.AMG GLC 43.jpg",
+          "modelName": "Mercedes-Benz AMG GLC 43",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "AMG A 45 S",
+          "minPrice": "93.65 Lakh",
+          "priceRange": "93.65 Lakh",
+          "image": "/assets/images/cars/Mercedes-Benz.AMG A 45 S.jpg",
+          "modelName": "Mercedes-Benz AMG A 45 S",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "Maybach S-Class",
+          "minPrice": "2.72 Cr",
+          "priceRange": "2.72 - 3.44 Cr",
+          "image": "/assets/images/cars/Mercedes-Benz.Maybach S-Class.jpg",
+          "modelName": "Mercedes-Benz Maybach S-Class",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "EQA",
+          "minPrice": "66 Lakh",
+          "priceRange": "66 Lakh",
+          "image": "/assets/images/cars/Mercedes-Benz.EQA.jpg",
+          "modelName": "Mercedes-Benz EQA",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Electric"
+        },
+        {
+          "name": "GLB",
+          "minPrice": "64.80 Lakh",
+          "priceRange": "64.80 - 71.80 Lakh",
+          "image": "/assets/images/cars/Mercedes-Benz.GLB.jpg",
+          "modelName": "Mercedes-Benz GLB",
+          "mileage": "9.7 kmpl",
+          "seatingCapacity": "7 Seats",
+          "fuelType": "Diesel / Petrol"
+        },
+        {
+          "name": "G-Class",
+          "minPrice": "2.55 Cr",
+          "priceRange": "2.55 - 4 Cr",
+          "image": "/assets/images/cars/Mercedes-Benz.G-Class.jpg",
+          "modelName": "Mercedes-Benz G-Class",
+          "mileage": "8.47 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel / Petrol"
+        },
+        {
+          "name": "CLE Cabriolet",
+          "minPrice": "1.10 Cr",
+          "priceRange": "1.10 Cr",
+          "image": "/assets/images/cars/Mercedes-Benz.CLE Cabriolet.jpg",
+          "modelName": "Mercedes-Benz CLE Cabriolet",
+          "mileage": "",
+          "seatingCapacity": "4 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "A-Class Limousine",
+          "minPrice": "46.05 Lakh",
+          "priceRange": "46.05 - 48.55 Lakh",
+          "image": "/assets/images/cars/Mercedes-Benz.A-Class Limousine.jpg",
+          "modelName": "Mercedes-Benz A-Class Limousine",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Diesel / Petrol"
+        },
+        {
+          "name": "AMG GLE 53",
+          "minPrice": "1.85 Cr",
+          "priceRange": "1.85 Cr",
+          "image": "/assets/images/cars/Mercedes-Benz.AMG GLE 53.jpg",
+          "modelName": "Mercedes-Benz AMG GLE 53",
+          "mileage": "8.9 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "AMG SL",
+          "minPrice": "2.44 Cr",
+          "priceRange": "2.44 Cr",
+          "image": "/assets/images/cars/Mercedes-Benz.AMG SL.jpg",
+          "modelName": "Mercedes-Benz AMG SL",
+          "mileage": "",
+          "seatingCapacity": "4 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "AMG E 53 Cabriolet",
+          "minPrice": "1.30 Cr",
+          "priceRange": "1.30 Cr",
+          "image": "/assets/images/cars/Mercedes-Benz.AMG E 53 Cabriolet.jpg",
+          "modelName": "Mercedes-Benz AMG E 53 Cabriolet",
+          "mileage": "",
+          "seatingCapacity": "4 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "AMG EQS",
+          "minPrice": "2.45 Cr",
+          "priceRange": "2.45 Cr",
+          "image": "/assets/images/cars/Mercedes-Benz.AMG EQS.jpg",
+          "modelName": "Mercedes-Benz AMG EQS",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Electric"
+        },
+        {
+          "name": "AMG GLA 35",
+          "minPrice": "58.50 Lakh",
+          "priceRange": "58.50 Lakh",
+          "image": "/assets/images/cars/Mercedes-Benz.AMG GLA 35.jpg",
+          "modelName": "Mercedes-Benz AMG GLA 35",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "AMG GT 4 Door Coupe",
+          "minPrice": "3.30 Cr",
+          "priceRange": "3.30 Cr",
+          "image": "/assets/images/cars/Mercedes-Benz.AMG GT 4 Door Coupe.jpg",
+          "modelName": "Mercedes-Benz AMG GT 4 Door Coupe",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "AMG S 63",
+          "minPrice": "3.30 Cr",
+          "priceRange": "3.30 - 3.80 Cr",
+          "image": "/assets/images/cars/Mercedes-Benz.AMG S 63.jpg",
+          "modelName": "Mercedes-Benz AMG S 63",
+          "mileage": "19.4 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        }],
+      "Mini": null,
+      "PMV": [{
+        "name": "EaS E",
+        "minPrice": "4.79 Lakh",
+        "priceRange": "4.79 Lakh",
+        "image": "/assets/images/cars/PMV.EaS E.jpg",
+        "modelName": "PMV EaS E",
+        "mileage": "",
+        "seatingCapacity": "2 Seats",
+        "fuelType": "Electric"
+      }],
+      "Porsche": [{
+        "name": "911",
+        "minPrice": "1.99 Cr",
+        "priceRange": "1.99 - 3.51 Cr",
+        "image": "/assets/images/cars/Porsche.911.jpg",
+        "modelName": "Porsche 911",
+        "mileage": "10.64 kmpl",
+        "seatingCapacity": "4 Seats",
+        "fuelType": "Petrol"
+      },
+        {
+          "name": "Cayenne",
+          "minPrice": "1.36 Cr",
+          "priceRange": "1.36 - 2 Cr",
+          "image": "/assets/images/cars/Porsche.Cayenne.jpg",
+          "modelName": "Porsche Cayenne",
+          "mileage": "10.8 kmpl",
+          "seatingCapacity": "4 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "Macan",
+          "minPrice": "88.06 Lakh",
+          "priceRange": "88.06 Lakh - 1.53 Cr",
+          "image": "/assets/images/cars/Porsche.Macan.jpg",
+          "modelName": "Porsche Macan",
+          "mileage": "11.24 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "Taycan",
+          "minPrice": "1.89 Cr",
+          "priceRange": "1.89 - 2.53 Cr",
+          "image": "/assets/images/cars/Porsche.Taycan.jpg",
+          "modelName": "Porsche Taycan",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Electric"
+        },
+        {
+          "name": "Panamera",
+          "minPrice": "1.68 Cr",
+          "priceRange": "1.68 Cr",
+          "image": "/assets/images/cars/Porsche.Panamera.jpg",
+          "modelName": "Porsche Panamera",
+          "mileage": "",
+          "seatingCapacity": "4 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "718",
+          "minPrice": "1.48 Cr",
+          "priceRange": "1.48 - 2.74 Cr",
+          "image": "/assets/images/cars/Porsche.718.jpg",
+          "modelName": "Porsche 718",
+          "mileage": "9.17 kmpl",
+          "seatingCapacity": "2 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "Macan EV",
+          "minPrice": "1.22 Cr",
+          "priceRange": "1.22 - 1.65 Cr",
+          "image": "/assets/images/cars/Porsche.Macan EV.jpg",
+          "modelName": "Porsche Macan EV",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Electric"
+        },
+        {
+          "name": "Cayenne Coupe",
+          "minPrice": "1.42 Cr",
+          "priceRange": "1.42 - 2.01 Cr",
+          "image": "/assets/images/cars/Porsche.Cayenne Coupe.jpg",
+          "modelName": "Porsche Cayenne Coupe",
+          "mileage": "",
+          "seatingCapacity": "4 Seats",
+          "fuelType": "Petrol"
+        }],
+      "Pravaig": [{
+        "name": "DEFY",
+        "minPrice": "39.50 Lakh",
+        "priceRange": "39.50 Lakh",
+        "image": "/assets/images/cars/Pravaig.DEFY.jpg",
+        "modelName": "Pravaig DEFY",
+        "mileage": "",
+        "seatingCapacity": "4 Seats",
+        "fuelType": "Electric"
+      }],
+      "Rolls-Royce": [{
+        "name": "Rolls-Royce Phantom",
+        "minPrice": "8.99 Cr",
+        "priceRange": "8.99 - 10.48 Cr",
+        "image": "/assets/images/cars/Rolls-Royce.Rolls-Royce Phantom.jpg",
+        "modelName": "Rolls-Royce Phantom",
+        "mileage": "9.8 kmpl",
+        "seatingCapacity": "5 Seats",
+        "fuelType": "Petrol"
+      },
+        {
+          "name": "Rolls-Royce Ghost",
+          "minPrice": "6.95 Cr",
+          "priceRange": "6.95 - 7.95 Cr",
+          "image": "/assets/images/cars/Rolls-Royce.Rolls-Royce Ghost.jpg",
+          "modelName": "Rolls-Royce Ghost",
+          "mileage": "6.33 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "Rolls-Royce Spectre",
+          "minPrice": "7.50 Cr",
+          "priceRange": "7.50 Cr",
+          "image": "/assets/images/cars/Rolls-Royce.Rolls-Royce Spectre.jpg",
+          "modelName": "Rolls-Royce Spectre",
+          "mileage": "",
+          "seatingCapacity": "4 Seats",
+          "fuelType": "Electric"
+        },
+        {
+          "name": "Rolls-Royce Cullinan",
+          "minPrice": "6.95 Cr",
+          "priceRange": "6.95 Cr",
+          "image": "/assets/images/cars/Rolls-Royce.Rolls-Royce Cullinan.jpg",
+          "modelName": "Rolls-Royce Cullinan",
+          "mileage": "9.5 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        }],
+      "Strom Motors": null,
+      "Volvo": [{
+        "name": "XC90",
+        "minPrice": "1.01 Cr",
+        "priceRange": "1.01 Cr",
+        "image": "/assets/images/cars/Volvo.XC90.jpg",
+        "modelName": "Volvo XC90",
+        "mileage": "17.2 kmpl",
+        "seatingCapacity": "7 Seats",
+        "fuelType": "Petrol"
+      },
+        {
+          "name": "XC60",
+          "minPrice": "68.90 Lakh",
+          "priceRange": "68.90 Lakh",
+          "image": "/assets/images/cars/Volvo.XC60.jpg",
+          "modelName": "Volvo XC60",
+          "mileage": "11.2 kmpl",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "S90",
+          "minPrice": "68.25 Lakh",
+          "priceRange": "68.25 Lakh",
+          "image": "/assets/images/cars/Volvo.S90.jpg",
+          "modelName": "Volvo S90",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Petrol"
+        },
+        {
+          "name": "C40 Recharge",
+          "minPrice": "62.95 Lakh",
+          "priceRange": "62.95 Lakh",
+          "image": "/assets/images/cars/Volvo.C40 Recharge.jpg",
+          "modelName": "Volvo C40 Recharge",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Electric"
+        },
+        {
+          "name": "XC40 Recharge",
+          "minPrice": "54.95 Lakh",
+          "priceRange": "54.95 - 57.90 Lakh",
+          "image": "/assets/images/cars/Volvo.XC40 Recharge.jpg",
+          "modelName": "Volvo XC40 Recharge",
+          "mileage": "",
+          "seatingCapacity": "5 Seats",
+          "fuelType": "Electric"
+        }]};
+
+    let gallery;
+
+
+    const openAlbum = (brand,
+      image) => {
+      console.log(brand,
+        image);
+      let photos = [];
+      let thumbs = [];
+      carBrands[brand].forEach(function (car) {
+        photos.push({
+          "url": car.image, "caption": car.name
+        });
+        thumbs.push(car.image);
+      });
+      gallery.params.photos = photos;
+      gallery.params.thumbs = thumbs;
+      gallery.activeIndex = thumbs.indexOf(image);
+      gallery.open();
+    }
+
+    $on('pageInit',
+      () => {
+        // Create PBs when page init
+        gallery = $f7.photoBrowser.create({
+          //photos: photos['car-gallery'],
+          //thumbs: thumbs['car-gallery'],
+          theme: 'dark',
+          swiper: {
+            preloadImages: false,
+            lazy: {
+              enabled: true,
+            },
+          },
+        });
+        console.log(gallery);
+      });
+
+    $on('pageBeforeRemove',
+      () => {
+        // Destroy PBs on page remove
+        gallery.destroy();
+      });
+
+    return $render;
+  };
+  </script>
