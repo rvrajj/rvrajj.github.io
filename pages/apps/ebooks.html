@@ -1,0 +1,222 @@
+<template>
+  <div class="page">
+    <div class="navbar">
+      <div class="navbar-bg"></div>
+      <div class="navbar-inner">
+        <div class="left">
+          <a class="link back">
+            <i class="icon icon-back"></i>
+            <span class="if-not-md">Jodhana.IN</span>
+          </a>
+        </div>
+        <div class="title">
+          E-Books
+        </div>
+        <div class="right">
+          <a class="link icon-only popover-open" data-popover=".popover-menu">
+            <i class="icon f7-icons if-not-md">ellipsis</i>
+            <i class="icon material-icons md-only">more_vert</i>
+          </a>
+          <div class="popover popover-menu" style="width: 120px">
+            <div class="popover-angle"></div>
+            <div class="popover-inner">
+              <div class="list">
+                <ul>
+                  <li><a class="list-button popover-close">Test</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--div class="title-large">
+          <div class="title-large-text">
+            Cultural Texts
+          </div>
+        </div-->
+      </div>
+    </div>
+    <div class="page-content">
+      
+      ${Object.keys(authors).length > 0 && Object.keys(authors).map((group) => $h`
+      
+      <div class="block-title block-title-large">
+        <span>${group}</span>
+      </div>
+      
+      <div class="list media-list  list-outline-ios list-strong-ios list-dividers-ios">
+      <ul>
+        ${Object.keys(authors[group]).length > 0 && Object.keys(authors[group]).map((key) => $h`
+        <li>
+          <a class="item-link">
+            <div class="item-content">
+              <div class="item-media"><img style="border-radius: 8px"
+                  src="${authors[group][key].image}" style="width:70px;height:70px" />
+              </div>
+              <div class="item-inner">
+                <div class="item-title-row">
+                  <div class="item-title">${authors[group][key].title}</div>
+                  <div class="item-after">${authors[group][key].after}</div>
+                </div>
+                <div class="item-subtitle">${authors[group][key].subtitle}</div>
+                <div class="item-text">${authors[group][key].text}</div>
+              </div>
+            </div>
+          </a>
+        </li>
+        `)}
+      </ul>
+    </div>
+    
+    `)}
+      
+    </div>
+    
+    <div class="popup demo-popup-push">
+      <div class="view view-init">
+        <div class="page page-with-navbar-large">
+          <div class="navbar navbar-large navbar-transparent">
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner">
+              <div class="left"><a class="link popup-close"><i class="icon icon-back"></i>
+              <span class="if-not-md">City Buses</span></a></div>
+              <div class="title">Route No. 10</div>
+              
+              <div class="title-large">
+                <div class="title-large-text">Route No. 10</div>
+              </div>
+            </div>
+          </div>
+          <div class="page-content">
+            <div class="block">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse faucibus mauris leo, eu bibendum
+                neque congue non. Ut leo mauris, eleifend eu commodo a, egestas ac urna. Maecenas in lacus faucibus,
+                viverra ipsum pulvinar, molestie arcu. Etiam lacinia venenatis dignissim. Suspendisse non nisl semper
+                tellus malesuada suscipit eu et eros. Nulla eu enim quis quam elementum vulputate. Mauris ornare
+                consequat nunc viverra pellentesque. Aenean semper eu massa sit amet aliquam. Integer et neque sed
+                libero mollis elementum at vitae ligula. Vestibulum pharetra sed libero sed porttitor. Suspendisse a
+                faucibus lectus.</p>
+              <p>Duis ut mauris sollicitudin, venenatis nisi sed, luctus ligula. Phasellus blandit nisl ut lorem semper
+                pharetra. Nullam tortor nibh, suscipit in consequat vel, feugiat sed quam. Nam risus libero, auctor vel
+                tristique ac, malesuada ut ante. Sed molestie, est in eleifend sagittis, leo tortor ullamcorper erat, at
+                vulputate eros sapien nec libero. Mauris dapibus laoreet nibh quis bibendum. Fusce dolor sem, suscipit
+                in iaculis id, pharetra at urna. Pellentesque tempor congue massa quis faucibus. Vestibulum nunc eros,
+                convallis blandit dui sit amet, gravida adipiscing libero.</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse faucibus mauris leo, eu bibendum
+                neque congue non. Ut leo mauris, eleifend eu commodo a, egestas ac urna. Maecenas in lacus faucibus,
+                viverra ipsum pulvinar, molestie arcu. Etiam lacinia venenatis dignissim. Suspendisse non nisl semper
+                tellus malesuada suscipit eu et eros. Nulla eu enim quis quam elementum vulputate. Mauris ornare
+                consequat nunc viverra pellentesque. Aenean semper eu massa sit amet aliquam. Integer et neque sed
+                libero mollis elementum at vitae ligula. Vestibulum pharetra sed libero sed porttitor. Suspendisse a
+                faucibus lectus.</p>
+            
+            
+          <div class="block-title">Side By Side</div>
+        
+    <div class="timeline timeline-sides">
+      <div class="timeline-item">
+        <div class="timeline-item-date">21 <small>DEC</small></div>
+        <div class="timeline-item-divider"></div>
+        <div class="timeline-item-content">
+          <div class="timeline-item-inner">Some text goes here</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-item-date">22 <small>DEC</small></div>
+        <div class="timeline-item-divider"></div>
+        <div class="timeline-item-content">
+          <div class="timeline-item-inner">Another text goes here</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-item-date">23 <small>DEC</small></div>
+        <div class="timeline-item-divider"></div>
+        <div class="timeline-item-content">
+          <div class="timeline-item-inner">Just plain text</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-item-date">24 <small>DEC</small></div>
+        <div class="timeline-item-divider"></div>
+        <div class="timeline-item-content">
+          <div class="timeline-item-inner">One more text here</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="timeline timeline-sides">
+      <div class="timeline-item">
+        <div class="timeline-item-date">21 <small>DEC</small></div>
+        <div class="timeline-item-divider"></div>
+        <div class="timeline-item-content">
+          <div class="timeline-item-inner">Some text goes here</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-item-date">22 <small>DEC</small></div>
+        <div class="timeline-item-divider"></div>
+        <div class="timeline-item-content">
+          <div class="timeline-item-inner">Another text goes here</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-item-date">23 <small>DEC</small></div>
+        <div class="timeline-item-divider"></div>
+        <div class="timeline-item-content">
+          <div class="timeline-item-inner">Just plain text</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-item-date">24 <small>DEC</small></div>
+        <div class="timeline-item-divider"></div>
+        <div class="timeline-item-content">
+          <div class="timeline-item-inner">One more text here</div>
+        </div>
+      </div>
+    </div>
+    </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</template>
+<script>
+  export default (props, { $f7, $on }) => {
+    
+    const authors = {
+      'Top Authors': {'premchand': {
+        title: 'मुंशी प्रेमचन्द',
+        image: '/assets/images/ebooks/premchand.webp',
+        after: '',
+        subtitle: '31 जुलाई 1880 - 8 अक्टुबर 1936',
+        text: 'धनपत राय श्रीवास्तव - जो प्रेमचंद नाम से जाने जाते हैं, वो हिन्दी और उर्दू के सर्वाधिक लोकप्रिय उपन्यासकार, कहानीकार एवं विचारक थे। उन्होंने सेवासदन, प्रेमाश्रम, रंगभूमि, निर्मला, गबन, कर्मभूमि, गोदान आदि लगभग डेढ़ दर्जन उपन्यास तथा कफन, पूस की रात, पंच परमेश्वर, बड़े घर की बेटी, बूढ़ी काकी, दो बैलों की कथा आदि तीन सौ से अधिक कहानियाँ लिखीं।',
+      },
+      'maithili-sharan-gupt': {
+        title: 'मैथिली शरण गुप्त',
+        image: '/assets/images/ebooks/Maithilisharan-Gupt.jpg',
+        after: '',
+        subtitle: '3 अगस्त 1886 - 12 दिसंबर 1964',
+        text: `राष्ट्रकवि मैथिलीशरण गुप्त हिन्दी के प्रसिद्ध कवि थे। हिन्दी साहित्य के इतिहास में वे खड़ी बोली के प्रथम महत्त्वपूर्ण कवि हैं। उन्हें साहित्य जगत में 'दद्दा' नाम से सम्बोधित किया जाता था। उनकी कृति भारत-भारती (1912) भारत के स्वतन्त्रता संग्राम के समय में काफी प्रभावशाली सिद्ध हुई थी और इसी कारण महात्मा गांधी ने उन्हें 'राष्ट्रकवि' की पदवी भी दी थी। उनकी जयन्ती 3 अगस्त को हर वर्ष 'कवि दिवस' के रूप में मनाया जाता है। सन 1954 में भारत सरकार ने उन्हें पद्मभूषण से सम्मानित किया।`,
+      }},
+      'Others': {
+        'ncert':{
+          title: 'NCERT Books',
+          image: '/assets/images/ebooks/NCERT.svg',
+          after: '',
+          subtitle: 'Class I - CLASS XII',
+          text: ''
+        }
+      }
+    };
+    
+    $on('pageInit', () => {
+      
+    });
+    $on('pageBeforeRemove', () => {
+      
+    });
+
+    return $render;
+  };
+</script>

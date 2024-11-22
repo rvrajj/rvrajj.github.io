@@ -1,0 +1,307 @@
+<template>
+  <div class="page">
+    <div class="navbar">
+      <div class="navbar-bg"></div>
+      <div class="navbar-inner sliding">
+        <div class="left">
+          <a class="link back">
+            <i class="icon icon-back"></i>
+            <span class="if-not-md">Jodhana.IN</span>
+          </a>
+        </div>
+        <div class="title">
+          My Programs
+        </div>
+        <div class="right">
+          <a class="link icon-only popover-open" data-popover=".popover-menu">
+            <i class="icon f7-icons if-not-md">ellipsis</i>
+            <i class="icon material-icons md-only">more_vert</i>
+          </a>
+          <div class="popover popover-menu" style="width: 120px">
+            <div class="popover-angle"></div>
+            <div class="popover-inner">
+              <div class="list">
+                <ul>
+                  <li><a class="list-button popover-close">Test</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--div class="title-large">
+          <div class="title-large-text">
+            My Programs
+          </div>
+        </div-->
+      </div>
+    </div>
+    <div class="page-content">
+      
+      
+      <div class="list media-list  list-outline-ios list-strong-ios list-dividers-ios">
+      <ul>
+        ${programs.length > 0 && programs.map((program) => $h`
+        <li>
+          <a class="item-link" @click="${() => execute(program)}">
+            <div class="item-content">
+              <div class="item-media"><i class="icon f7-icons">${program.icon}</i>
+              </div>
+              <div class="item-inner">
+                <div class="item-title-row">
+                  <div class="item-title">${program.title}</div>
+                  <div class="item-after">${program.after}</div>
+                </div>
+                <div class="item-subtitle">${program.subtitle}</div>
+                <div class="item-text">${program.text}</div>
+              </div>
+            </div>
+          </a>
+        </li>
+        `)}
+        
+      </ul>
+    </div>
+      
+    </div>
+    
+    <div class="popup">
+      <div class="view view-init">
+        <div class="page page-with-navbar-large">
+          <div class="navbar navbar-large navbar-transparent">
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner">
+              <div class="left"><a class="link popup-close"><i class="icon icon-back"></i>
+              <span class="if-not-md">Back</span></a></div>
+              <div class="title">Hello World</div>
+              
+              <div class="title-large">
+                <div class="title-large-text">Hello World</div>
+              </div>
+            </div>
+          </div>
+          <div class="page-content">
+            <div class="block block-strong-ios block-outline-ios">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</template>
+<script>
+  export default (props, { $f7, $f7router, $on }) => {
+    
+    const programs = [
+      {"title":"Print Hello World!", "icon":"number", "subtitle":"", "text":"", "after": "₹1", "id": "hello-world"},
+      {"title":"Print your name", "icon":"number", "subtitle":"", "text":"", "after": "₹10", "id": "your-name"},
+      {"title":"Circle Formulas", "icon":"number", "subtitle":"", "text":"", "after": "₹50", "id": "circle-formulas"},
+      {"title":"Odd/Even", "icon":"number", "subtitle":"", "text":"", "after": "₹50", "id": "odd-even"},
+      {"title":"Prime number", "icon":"number", "subtitle":"", "text":"", "after": "₹50", "id": "prime-number"},
+      {"title":"Factorial", "icon":"number", "subtitle":"", "text":"", "after": "₹50", "id": "factorial"},
+      {"title":"Reverse text", "icon":"number", "subtitle":"", "text":"", "after": "₹50", "id": "reverse-text"},
+      {"title":"Marksheet", "icon":"number", "subtitle":"", "text":"", "after": "₹100", "id": "marksheet"},
+    ];
+    let popup;
+    
+    function isNatural(n) {
+      return n > 0 && Math.floor(n) === +n;
+    }
+    
+    const execute = (program) => {
+      console.log("Executing", program.id);
+      
+      
+      switch(program.id){
+        case 'hello-world':
+          $(".popup").find(".title,.title-large-text").text("Hello World!");
+          $(".popup").find(".block").html(`
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse faucibus mauris leo, eu bibendum
+                neque congue non. Ut leo mauris, eleifend eu commodo a, egestas ac urna. Maecenas in lacus faucibus,
+                viverra ipsum pulvinar, molestie arcu. Etiam lacinia venenatis dignissim. Suspendisse non nisl semper
+                tellus malesuada suscipit eu et eros. Nulla eu enim quis quam elementum vulputate. Mauris ornare
+                consequat nunc viverra pellentesque. Aenean semper eu massa sit amet aliquam. Integer et neque sed
+                libero mollis elementum at vitae ligula. Vestibulum pharetra sed libero sed porttitor. Suspendisse a
+                faucibus lectus.</p>
+              <p>Duis ut mauris sollicitudin, venenatis nisi sed, luctus ligula. Phasellus blandit nisl ut lorem semper
+                pharetra. Nullam tortor nibh, suscipit in consequat vel, feugiat sed quam. Nam risus libero, auctor vel
+                tristique ac, malesuada ut ante. Sed molestie, est in eleifend sagittis, leo tortor ullamcorper erat, at
+                vulputate eros sapien nec libero. Mauris dapibus laoreet nibh quis bibendum. Fusce dolor sem, suscipit
+                in iaculis id, pharetra at urna. Pellentesque tempor congue massa quis faucibus. Vestibulum nunc eros,
+                convallis blandit dui sit amet, gravida adipiscing libero.</p>
+          `);
+          popup.open();
+        break;
+        case 'your-name':
+          $f7.dialog.prompt('What is your name?', 'Your Name', function (name) {
+            $(".popup").find(".title,.title-large-text").text("Your Name");
+            $(".popup").find(".block").html(`
+            <p>Your name is ${name}.</p>
+            <p>Hello ${name}!</p>
+            `);
+            popup.open();
+          });
+        break;
+        case 'circle-formulas':
+          $f7.dialog.prompt('Enter radius of the circle', 'Circle Formulas', function (r) {
+            $(".popup").find(".block").html(`
+            <p>Radius = ${r}</p>
+            <p>Area of circle = ${3.14*r*r}</p>
+            <p>Perimeter/Circumference of circle = ${2*3.14*r}</p>
+            `);
+            popup.open();
+          }, '');
+        break;
+        case 'odd-even':
+          $f7.dialog.prompt('Enter a number', 'Odd Even', function (n) {
+            $f7.dialog.alert(Number.isInteger(+n) ? n%2 == 0 ? `${n} is even number.`: `${n} is odd number.`: 'Error!', "");
+          });
+        break;
+        case 'prime-number':
+          $f7.dialog.prompt('Enter a number', 'Prime Number', function (n) {
+            
+            var flag=true;
+            for(i=2;i<Math.sqrt(n);i++){
+              if(n%i==0){
+                flag=false;
+                break;
+              }
+            }
+            
+            $f7.dialog.alert(isNatural(n) && n!=1 ? flag ? `${n} is prime number.` : `${n} is not a prime number.` : `Error!`, "Prime Number");
+          });
+        break;
+        case 'factorial':
+          $f7.dialog.prompt('Enter a number', 'Factorial', function (n) {
+            var f=1;
+            for(i=1;i<=n;i++){
+              f *= i;
+            }
+            
+            $f7.dialog.alert(isNatural(n) ? `${n}! is ${f}` : n == 0 ? `${n}! is 1` : 'Error!', "Factorial");
+          });
+        break;
+        case 'reverse-text':
+          $f7.dialog.prompt('Enter some text', 'Reverse Text', function (text) {
+            var x = "";
+            for(i=0;i<text.length;i++){
+              x+=text[text.length-i-1];
+            }
+            $f7.dialog.alert(x, "Reverse text");
+          });
+        break;
+        case "marksheet":
+          $f7router.navigate('/apps/programs/marksheet/');
+          
+          /*
+          $f7.dialog.create({
+              title: 'Marksheet',
+              text: "Enter details",
+              content: `
+              <div>
+              <div class="dialog-input-field dialog-input-double input input-focused">
+                <input type="text" name="dialog-sname" placeholder="Student's Name" class="dialog-input input-focused">
+              </div>
+              <div class="dialog-input-field dialog-input-double input">
+                <input type="text" name="dialog-fname" placeholder="Father's Name" class="dialog-input">
+              </div>
+              </div>
+              <div>
+              <div class="dialog-input-field dialog-input-double input">
+                <input type="text" name="dialog-sname" placeholder="Student's Name" class="dialog-input">
+              </div>
+              <div class="dialog-input-field dialog-input-double input">
+                <input type="text" name="dialog-fname" placeholder="Father's Name" class="dialog-input">
+              </div>
+              </div>
+              `,
+              buttons: [{
+                text: 'Cancel',
+                keyCodes: [27],
+                close: true
+              }, {
+                text: 'OK',
+                strong: true,
+                keyCodes: [13],
+                onClick: function(d, e){
+                  console.log(d.$el.find('[name="dialog-username"]').val(),e);
+
+                $(".popup").find(".title,.title-large-text").text("Marksheet");
+                $(".popup").find(".block").html(`
+                <div class="grid grid-cols-2 grid-gap" >
+                <p>Name : <b style="">${d.$el.find('[name="dialog-sname"]').val()}</b></br>Father's Name : <b style="">${d.$el.find('[name="dialog-fname"]').val()}</b></p>
+                <p>hjjjj</br>jjvjj</p>
+                </div>
+                <div class="data-table">
+        <table>
+          <thead>
+            <tr>
+              <th class="label-cell">Dessert (100g serving)</th>
+              <th class="numeric-cell">Calories</th>
+              <th class="numeric-cell">Fat (g)</th>
+              <th class="numeric-cell">Carbs</th>
+              <th class="numeric-cell">Protein (g)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="label-cell">Frozen yogurt</td>
+              <td class="numeric-cell">159</td>
+              <td class="numeric-cell">6.0</td>
+              <td class="numeric-cell">24</td>
+              <td class="numeric-cell">4.0</td>
+            </tr>
+            <tr>
+              <td class="label-cell">Ice cream sandwich</td>
+              <td class="numeric-cell">237</td>
+              <td class="numeric-cell">9.0</td>
+              <td class="numeric-cell">37</td>
+              <td class="numeric-cell">4.4</td>
+            </tr>
+            <tr>
+              <td class="label-cell">Eclair</td>
+              <td class="numeric-cell">262</td>
+              <td class="numeric-cell">16.0</td>
+              <td class="numeric-cell">24</td>
+              <td class="numeric-cell">6.0</td>
+            </tr>
+            <tr>
+              <td class="label-cell">Cupcake</td>
+              <td class="numeric-cell">305</td>
+              <td class="numeric-cell">3.7</td>
+              <td class="numeric-cell">67</td>
+              <td class="numeric-cell">4.3</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+                `,
+                );
+                popup.open();
+                },
+                destroyOnClose: true,
+              }]
+            }).open();
+          */
+      
+        break;
+        default :
+          console.log(program.id, "doesn't exist..");
+      }
+    };
+    
+    $on('pageInit', () => {
+      popup = $f7.popup.create({
+        el: '.popup',
+        swipeToClose: true,
+        //push: true,
+      });
+    });
+    
+    $on('pageBeforeRemove', () => {
+      if (popup) popup.destroy();
+    });
+
+    return $render;
+  };
+</script>
