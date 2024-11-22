@@ -1,0 +1,207 @@
+<template>
+  <div class="page">
+    <div class="navbar">
+      <div class="navbar-bg"></div>
+      <div class="navbar-inner sliding">
+        <div class="left">
+          <a class="link back">
+            <i class="icon icon-back"></i>
+            <span class="if-not-md">Gallery</span>
+          </a>
+        </div>
+        <div class="title">
+          Jodhpur
+        </div>
+        <div class="right">
+          <a class="link icon-only popover-open" data-popover=".popover-menu">
+            <i class="icon f7-icons if-not-md">ellipsis</i>
+            <i class="icon material-icons md-only">more_vert</i>
+          </a>
+          <div class="popover popover-menu" style="width: 120px">
+            <div class="popover-angle"></div>
+            <div class="popover-inner">
+              <div class="list">
+                <ul>
+                  <li><a class="list-button popover-close">Test</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--div class="title-large">
+          <div class="title-large-text">
+            Jodhpur
+          </div>
+        </div-->
+      </div>
+    </div>
+    <div class="page-content">
+
+      ${Object.keys(places).length > 0 && Object.keys(places).map((group) => $h`
+
+      <div class="block-title text-color-red">
+        ${group}
+      </div>
+
+      <div class="block featured-apps">
+        
+        
+      ${places[group] === null && $h`
+
+      <div class="featured-app">
+        <a>
+          <div class="featured-app-headline">
+            --
+          </div>
+          <div class="featured-app-title">
+            --
+          </div>
+          <div class="featured-app-subtitle">
+            --
+          </div>
+          <img loading="lazy" class="featured-app-image" alt="--" src="/assets/images/jodhpur/Default.jpg" />
+        </a>
+      </div>
+
+      `}
+      
+      ${places[group] && places[group].length > 0 && places[group].map((place) => $h`
+        
+        
+        <div class="featured-app">
+          <a @click="${() => openAlbum(group, place.image)}">
+            <img loading="lazy" class="featured-app-image" alt="${place.title}" src="${place.image}" />
+            <div class="featured-app-headline">
+              ${place.headline}
+            </div>
+            <div class="featured-app-title">
+              ${place.title}
+            </div>
+            <div class="featured-app-subtitle">
+              ${place.subtitle}
+            </div>
+
+          </a>
+        </div>
+        
+        
+      `)}
+      </div>
+      
+      `)}
+
+    </div>
+  </div>
+</template>
+<script>
+  export default (props, {
+    $f7, $on
+  }) => {
+
+    const places = {
+      'Remarkable Places in Jodhpur': [
+          {
+            title: 'Mehrangarh Fort',
+            headline: 'Historical Landmark',
+            subtitle: 'One of the Largest Forts in Rajasthan',
+            image: '/assets/images/jodhpur/mehrangarh-fort.jpg'
+          },
+          {
+            title: 'Ghanta Ghar',
+            headline: 'Clock Tower',
+            subtitle: 'Built by Maharaja Sardar Singh',
+            image: '/assets/images/jodhpur/ghantaghar.jpg'
+          },
+          {
+            title: 'Toorji Ka Jhalra',
+            headline: 'Ancient StepWell',
+            subtitle: 'Built in 1740 by Maharani Toorji',
+            image: '/assets/images/jodhpur/toorjikajhalra.jpg'
+          },
+          {
+            title: 'Jaswant Thada',
+            headline: 'Memorial House',
+            subtitle: 'The Taj Mahal of Rajasthan',
+            image: '/assets/images/jodhpur/jaswant-thada.jpg'
+          }],
+      'Temples of Jodhpur': [
+          {
+            title: 'Shree Chamunda Mataji Temple',
+            headline: 'Guardian Deity of the Royal Family',
+            subtitle: 'Built in the 15th Century by Rao Jodha',
+            image: '/assets/images/jodhpur/chamunda-mataji-mandir.webp'
+          },
+          {
+            title: 'Masuriya Baba Ramdev Temple',
+            headline: '',
+            subtitle: '',
+            image: '/assets/images/jodhpur/masuriya-mandir.jpg'
+          }],
+      'Public Parks in Jodhpur': [
+          {
+            title: 'Machia Safari Park',
+            headline: 'Rich Variety of Wildlife',
+            subtitle: 'Lion, Tiger, Bear, Crocodile & Ostrich',
+            image: '/assets/images/jodhpur/machia.jpg'
+          }
+        ],
+      'Institutes in Jodhpur': [
+          {
+            title: 'AFRI',
+            headline: 'Arid Forest Research Institute',
+            subtitle: 'Biodiversity Conservation',
+            image: '/assets/images/jodhpur/afri.jpg'
+          },
+          {
+            title: 'CAZRI',
+            headline: 'Central Arid Zone Research Institute',
+            subtitle: 'Farming in Arid Regions of India',
+            image: '/assets/images/jodhpur/cazri.jpg'
+          }
+        ]
+      };
+
+    let gallery;
+
+    const openAlbum = (group,
+      image) => {
+      console.log(group,
+        image);
+      let photos = [];
+      let thumbs = [];
+      places[group].forEach(function (place) {
+        photos.push({
+          "url": place.image, "caption": place.title
+        });
+        thumbs.push(place.image);
+      });
+      gallery.params.photos = photos;
+      gallery.params.thumbs = thumbs;
+      gallery.activeIndex = thumbs.indexOf(image);
+      gallery.open();
+    }
+    
+    
+    
+    $on('pageInit', () => {
+      // Create PBs when page init
+      gallery = $f7.photoBrowser.create({
+        //photos: photos['mehrangarh-fort'],
+        //thumbs: thumbs['mehrangarh-fort'],
+        theme: 'dark',
+        swiper: {
+          preloadImages: false,
+          lazy: {
+            enabled: true,
+          },
+        },
+      });
+    });
+    $on('pageBeforeRemove', () => {
+      // Destroy PBs on page remove
+      gallery.destroy();
+    });
+
+    return $render;
+  };
+  </script>
