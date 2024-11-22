@@ -1,359 +1,83 @@
 <template>
   <div class="page">
     <div class="page-content">
-      <!--swiper-container pagination zoom navigation loop speed="600" class="demo-swiper">
-            <swiper-slide>
-              <div class="swiper-zoom-container">
-                <img src="/images/afri.jpg" />
-              </div>
-            </swiper-slide>
-            <swiper-slide>
-              <div class="swiper-zoom-container">
-                <img src="/images/ghantaghar.jpg" />
-              </div>
-            </swiper-slide>
-            <swiper-slide>
-              <div class="swiper-zoom-container">
-                <img src="/images/ghantaghar.jpg" />
-              </div>
-            </swiper-slide>
-          </swiper-container-->
-          
-          <swiper-container pagination navigation parallax speed="600" class="demo-swiper-parallax color-black">
-      <div slot="container-start" data-swiper-parallax="-23%"
-        style="background-image: url(/images/mehrangarh/20241011_110051.jpg)"
-        class="swiper-parallax-bg"></div>
-      <swiper-slide class="text-color-black">
-        <div data-swiper-parallax="-300" class="swiper-slide-title">Jodhana</div>
-        <div data-swiper-parallax="-200" class="swiper-slide-subtitle">The Blue City</div>
-        <div data-swiper-parallax="-100" class="swiper-slide-text">
-          <p>Jodhana (officially called Jodhpur) is a cultural city located in the western part of India, in the center of Rajasthan. It is known for ancient temples, beautiful forts and palaces, havells and even houses that are built in vivid shades of blue.</p>
-        </div>
-      </swiper-slide>
-      <swiper-slide class="text-color-black">
-        <div data-swiper-parallax="-300" class="swiper-slide-title clock">23˚C</div>
-        <div data-swiper-parallax="-200" class="swiper-slide-subtitle time">07:28 pm</div>
-        <!--div data-swiper-parallax="-100" class="swiper-slide-text">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus
-            felis iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo. Integer
-            laoreet magna nec elit suscipit, ac laoreet nibh euismod. Aliquam hendrerit lorem at elit facilisis
-            rutrum. Ut at ullamcorper velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut libero. Aenean
-            feugiat non eros quis feugiat.</p>
-        </div-->
-      </swiper-slide>
-      <swiper-slide class="text-color-black">
-        <div data-swiper-parallax="-300" class="swiper-slide-title">Slide 3</div>
-        <div data-swiper-parallax="-200" class="swiper-slide-subtitle">Subtitle</div>
-        <div data-swiper-parallax="-100" class="swiper-slide-text">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus
-            felis iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo. Integer
-            laoreet magna nec elit suscipit, ac laoreet nibh euismod. Aliquam hendrerit lorem at elit facilisis
-            rutrum. Ut at ullamcorper velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut libero. Aenean
-            feugiat non eros quis feugiat.</p>
-        </div>
-      </swiper-slide>
-    </swiper-container>
-      <div class="block-title">
-        Remarkable Places in Jodhpur
-      </div>
-      <div class="demo-expandable-cards">
-
-        <div class="card card-outline-md demo-card-header-pic">
-          <a style="background-image:url(/images/mehrangarh-fort.jpg); height: 240px" valign="bottom" class="card-header text-color-white" href="/blog/mehrangarh-fort/">
-            मेहरानगढ़ किला
-          </a>
-        <div class="card-footer"><span >by <a class="link" href="/user/admin">Admin</a></span><span class="date">January 21, 2015</span></div>
-        </div>
-        
-    </div>
-    <div class="block-title">
-        Institutes in Jodhpur
-    </div>
-    
-    
-        <div class="card card-outline-md demo-card-header-pic">
-          <a style="background-image:url(/images/afri.jpg); height: 240px" valign="bottom" class="card-header text-color-white" href="/blog/afri/">
-            AFRI
-          </a>
-        <div class="card-footer"><span >by <a class="link" href="/user/admin">Admin</a></span><span class="date">January 21, 2015</span></div>
-        </div>
-        
-        
-        <div class="card card-outline-md demo-card-header-pic">
-          <a style="background-image:url(/images/cazri.jpg); background: green no-repeat center bottom; background-size: cover; height: 240px" valign="bottom" class="card-header text-color-black" href="/blog/cazri/">
-            CAZRI
-          </a>
-        <div class="card-footer"><span >by <a class="link" href="/user/admin">Admin</a></span><span class="date">January 21, 2015</span></div>
-        </div>
-        
-    
-      <div class="demo-expandable-cards">
-
-        <div class="card card-expandable card-tablet-fullscreen">
-          <div class="card-content">
-            <div style="background: url(/images/afri.jpg) no-repeat center bottom; background-size: cover; height: 240px">
-            </div>
-            <a class="link card-close card-opened-fade-in color-white" style="position: absolute; right: 15px; top: 15px">
-              <i class="icon f7-icons">xmark_circle_fill</i>
-            </a>
-            <div class="card-header display-block" style="height: 60px">
-              AFRI
-            </div>
-            <div class="card-content-padding">
-              <p>
-                AFRI stands for <b>Arid Forest Research Institute</b>, located in Jodhpur, Rajasthan. It is a premier research institution under the <b>Indian Council of Forestry Research and Education (ICFRE)</b>. AFRI focuses on addressing the challenges related to forestry and natural resources in arid and semi-arid regions of India, especially the Thar Desert.
-              </p>
-              <p>
-                Key objectives of AFRI include:
-                <ul>
-                  <li><b>Forest conservation and management</b> in dry and arid zones.</li>
-                  <li><b>Biodiversity conservation</b> and restoration of degraded lands.</li>
-                  <li><b>Desertification control</b> through afforestation and sustainable land-use practices.</li>
-                  <li>Research in <b>agroforestry</b> and the development of tree species suitable for drylands.</li>
-                </ul>
-              </p>
-              <p>
-                The institute conducts scientific research to develop techniques that improve vegetation cover and soil fertility, thereby contributing to environmental conservation and livelihood enhancement for communities in these regions.
-              </p>
-              <p>
-                The <b>Arid Forest Research Institute (AFRI)</b> in Jodhpur has a significant history rooted in India’s efforts to combat desertification and manage forest resources in arid and semi-arid regions, particularly in Rajasthan.
-              </p>
-              
-              <h3>Key Milestones in AFRI's History:</h3>
-              <p>
-                <ol>
-                  <li><b>Establishment</b>: AFRI was established in <b>1988</b> under the <b>Indian Council of Forestry Research and Education (ICFRE)</b>, Dehradun, as a specialized research institute focusing on arid ecosystems. The primary mission was to address the challenges posed by desertification, deforestation, and the degradation of natural resources in arid regions like the Thar Desert.</li>
-                  <li><b>Purpose and Objectives</b>: The creation of AFRI was part of India's broader strategy to tackle environmental degradation in dry and semi-dry regions. The emphasis was on <b>afforestation, reforestation</b>, and the development of techniques to restore productivity to degraded lands, particularly in the harsh climatic conditions of the Thar Desert.</li>
-                  <li><b>Research Focus</b>: In its early years, AFRI concentrated on researching <b>agroforestry, soil conservation</b>, and the <b>ecological restoration</b> of degraded forests and grasslands. It also worked on improving the resilience of desert and arid ecosystems to the pressures of climate change, human activities, and natural processes like desertification.</li>
-                  <li><b>Expansion of Research Areas</b>: Over time, AFRI expanded its research scope to include:
-                  <ul>
-                    <li><b>Silviculture</b> (the growing and cultivation of trees) in arid regions.</li>
-                    <li>Development of <b>drought-resistant species.</b></li>
-                    <li>Studies on <b>desert ecology</b> and how to increase the forest cover in the arid regions of Rajasthan and beyond.></li>
-                    <li><b>Forest genetics, biotechnology</b>, and <b>plant physiology</b>.</li>
-                    </ul>
-                  </li>
-                  <li><b>Contributions to Local Communities</b>: AFRI’s research has played a key role in supporting the livelihoods of local communities by promoting <b>sustainable land management practices, water conservation techniques</b>, and the use of local plant species for <b>agroforestry</b> and <b>horticulture.</b></li>
-                  <li><b>Collaborations and Impact</b>: AFRI has worked with several national and international organizations over the years, contributing to India’s environmental goals. Its work has supported India’s commitments under the <b>United Nations Convention to Combat Desertification (UNCCD).</b></li>
-                </ol>
-              </p>
-              
-              <h3>Current Role:</h3>
-              <p>
-                Today, AFRI continues to be a leading institution in <b>arid zone forestry research</b>. It plays a vital role in supporting the government’s initiatives to increase forest cover, mitigate the impacts of climate change, and promote sustainable environmental practices in some of India’s most challenging landscapes.
-              </p>
-              <p>
-                The Arid Forest Research Institute (AFRI) in Jodhpur operates through a multidisciplinary approach focused on research, development, and extension activities aimed at addressing environmental challenges specific to arid and semi-arid regions. Here’s how AFRI works:
-              </p>
-              <h4>1. Research Divisions</h4>
-              <p>AFRI is organized into various specialized divisions, each working on different aspects of arid forestry and natural resource management. Some of the key divisions include:
-                <ul>
-                  <li><b>Silviculture Division</b>: Researches tree species suitable for arid climates, focusing on the propagation, growth, and management of trees that can thrive in dry conditions.</li>
-                  <li><b>Forest Ecology and Rehabilitation Division</b>: Works on the ecological restoration of degraded lands, desertification control, and biodiversity conservation.</li>
-                  <li><b>Forest Genetics and Tree Improvement </b>: Focuses on developing genetically superior and drought-tolerant tree species that are better suited for the harsh conditions of the Thar Desert and other arid regions.</li>
-                  <li><b>Forest Protection Division</b>: Studies issues related to pests, diseases, and other factors that negatively affect forests and tree species in arid areas.</li>
-                  <li><b>Agroforestry and Extension Division</b>: Promotes sustainable land-use practices by integrating trees with crops and livestock farming, improving productivity, and providing livelihood support to local communities.</li>
-                  <li><b>Forest Botany Division</b>: Conducts studies on plant species in arid zones, documenting medicinal plants and their uses, and studying the ecological role of different species.</li>
-                </ul>
-              
-              </p>
-              <h4>2. Field Research and Experiments</h4>
-              <p>
-                AFRI conducts extensive field research and experiments to develop techniques for afforestation, desertification control, and soil conservation. Field trials are conducted in arid areas to test various tree species, water harvesting techniques, and soil improvement strategies.
-                <ul>
-                  <li><b>Nursery development</b>: AFRI operates nurseries to cultivate drought-resistant plant species that can be used for afforestation and restoration projects.</li>
-                  <li><b>Pilot projects</b>: It regularly undertakes pilot projects to test and demonstrate new technologies and practices in real-world settings before scaling them up.</li>
-                </ul>
-              </p>
-              
-              <h4>3. Collaboration with Local Communities</h4>
-              <p>A significant part of AFRI's work involves collaborating with local communities to ensure sustainable resource management. This includes:
-              <ul>
-                <li><b>Training and capacity building</b>: Providing training to farmers, forest department officials, and NGOs in arid zone agroforestry, water conservation, and sustainable land-use practices.</li>
-                <li><b>Extension services</b>: AFRI's extension division works to disseminate research findings and innovative practices to rural communities, helping them implement sustainable forestry and land-use techniques.</li>
-              </ul>
-              </p>
-              
-              <h4>4. Innovations in Water Management and Desertification Control</h4>
-              <p>
-                Since water scarcity is a critical issue in arid regions, AFRI focuses on research related to water conservation and management:
-                <ul>
-                  <li><b>Rainwater harvesting</b>: Techniques for capturing and storing rainwater to be used during dry periods.</li>
-                  <li><b>Soil moisture conservation</b>: Methods to enhance soil water retention, such as mulching, planting drought-resistant trees, and contour trenching.</li>
-                  <li><b>Desertification control</b>: AFRI develops strategies to prevent desertification through afforestation, sand dune stabilization, and the planting of windbreaks and shelterbelts.</li>
-                </ul>
-              </p>
-              
-              
-              <h4>5. Collaboration with Government and International Bodies</h4>
-              <p>
-                AFRI works closely with government agencies, research institutions, and international organizations to implement programs and policies related to arid zone forestry, biodiversity conservation, and desertification control. It also contributes to India’s goals under global environmental agreements like the <b>United Nations Convention to Combat Desertification (UNCCD).</b>
-              </p>
-              
-              <h4>6. Documentation and Knowledge Dissemination</h4>
-              <p>
-                AFRI plays a vital role in documenting the flora and fauna of arid regions, especially plants with medicinal value and species that are well-suited to extreme climates. It publishes research papers, technical bulletins, and manuals to share its findings with the scientific community, policymakers, and the public.
-              </p>
-              
-              <h4>7. Tree Improvement and Germplasm Conservation</h4>
-              <p>
-                AFRI conducts extensive research on the genetic improvement of tree species to enhance their adaptability, growth, and productivity in arid regions. It maintains <b>germplasm banks</b> for storing seeds of important arid-zone species, ensuring their availability for future use.
-              </p>
-              
-              <h4>8. Climate Change Mitigation</h4>
-              <p>AFRI’s research contributes to combating the impacts of <b>climate change</b> in arid regions by developing techniques for carbon sequestration, reducing land degradation, and promoting the use of tree species that can thrive under changing climate conditions.</p>
-              
-              <h4>9. Impact Assessment and Policy Advocacy</h4>
-              <p>The institute plays a role in assessing the environmental impact of different land management practices in arid zones. Based on its research, AFRI provides recommendations to policymakers on strategies for sustainable forest management, desertification control, and afforestation.</p>
-              
-              <h3>Summary of AFRI's Working Methodology:</h3>
-              <p>
-                <ul>
-                  <li><b>Research & Development</b>: Conducting scientific research on arid forestry, desert ecology, and sustainable land management.</li>
-                  <li><b>Field Trials</b>: Testing species and techniques through pilot projects and experiments.</li>
-                  <li><b>Community Collaboration</b>: Engaging with local communities through training, education, and capacity-building efforts.</li>
-                  <li><b>Innovation</b>: Developing new solutions for water management, soil conservation, and desertification control.</li>
-                  <li><b>Documentation</b>: Publishing research findings and sharing knowledge through extension programs.</li>
-                  <li><b>Policy Support</b>: Contributing to government policies on forest management and environmental conservation in arid regions.</li>
-                </ul>
-              </p>
-              
-              <p>
-                Through these activities, AFRI helps to ensure sustainable management of arid ecosystems while supporting the livelihoods of the communities dependent on them.
-              </p>
-              
-              <p>
-                <a class="button button-fill button-round button-large card-close">Close</a>
-              </p>
-            </div>
+      
+      <swiper-container pagination navigation parallax speed="600" class="demo-swiper-parallax color-white">
+        <div slot="container-start" data-swiper-parallax="-23%"
+          style="background-image: url(/assets/images/parallax.jpg)"
+          class="swiper-parallax-bg"></div>
+        <swiper-slide class="text-color-black">
+          <div data-swiper-parallax="-300" class="swiper-slide-title text-color-blue">
+            Jodhana
           </div>
-        </div>
-        
-
-        <div class="card card-expandable card-tablet-fullscreen">
-          <div class="card-content">
-            <div style="background: green no-repeat center bottom; background-size: cover; height: 240px">
-            </div>
-            <a class="link card-close card-opened-fade-in color-white" style="position: absolute; right: 15px; top: 15px">
-              <i class="icon f7-icons">xmark_circle_fill</i>
-            </a>
-            <div class="card-header display-block" style="height: 60px">
-              CAZRI
-            </div>
-            <div class="card-content-padding">
-              <p>
-                CAZRI, or the <b>Central Arid Zone Research Institute</b>, is a premier research institute located in Jodhpur, Rajasthan. It is part of the Indian Council of Agricultural Research (ICAR) and focuses on conducting research and developing technologies for the sustainable development of arid and semi-arid regions of India.
-              </p>
-              <h3>Key Functions of CAZRI:</h3>
-              <p>
-                <ol>
-                  <li><b>Research</b>: CAZRI undertakes research in the fields of desert ecology, climate change, soil and water management, and arid agriculture.</li>
-                  <li><b>Agriculture and Livestock</b>: It helps improve farming practices and livestock management suited to arid environments, where water is scarce and soil fertility is low.</li>
-                  <li><b>Natural Resource Management</b>: CAZRI works on optimizing the use of natural resources such as land and water in these regions.</li>
-                  <li><b>Technology Transfer</b>: It develops and transfers new technologies to farmers to help them improve their livelihoods while protecting the environment.</li>
-                </ol>
-              </p>
-              <p>
-                CAZRI plays a critical role in addressing the unique challenges of India's drylands, particularly in the states of Rajasthan, Gujarat, Punjab, and Haryana.
-              </p>
-              <p>
-                The Central Arid Zone Research Institute (CAZRI) in Jodhpur has a rich history rooted in addressing the specific challenges of India's arid and semi-arid regions. Here's an overview of its development:
-              </p>
-              
-              
-              <h3>Establishment and Early History (1950s–1960s):</h3>
-              <p>
-                <ol>
-                  <li>Origin: CAZRI was established in 1959 as a response to the growing need for scientific research on desertification, soil erosion, and the sustainable development of arid zones. The development of agriculture in desert regions, especially Rajasthan's Thar Desert, required special attention.</li>
-                  <li>UNESCO’s Involvement: The idea for the institute came from the UNESCO Mission on Arid Zone Research, which visited India in the late 1950s and emphasized the need for a dedicated research institute focused on desert areas. Their recommendations led to the creation of CAZRI under the aegis of the Indian Council of Agricultural Research (ICAR).</li>
-                  </ol>
-                </p>
-                
-                <h3>Growth and Research Expansion (1970s–1990s):</h3>
-                <p>
-                  <ol>
-                    <li><b>Initial Focus</b>: CAZRI initially focused on soil conservation, desertification control, drought management, and water harvesting techniques. These were critical areas of research, as these factors significantly impacted the livelihoods of people in arid regions.</li>
-                    <li><b>Natural Resource Management</b>: As it evolved, CAZRI expanded its research to cover the entire ecosystem, looking at vegetation, afforestation, and livestock management, which are all key to life in arid environments. It also began studying climate and its effects on agriculture.</li>
-                    <li><b>Scientific Collaborations</b>: The institute also began working with other national and international bodies to tackle desertification, including collaboration with the <b>United Nations Environment Programme (UNEP)</b> and several global desert research centers.</li>
-                  </ol>
-                </p>
-                
-                <h3>Modern Developments (2000s–Present):</h3>
-                <p>
-                  <ol>
-                    <li><b>Technology and Sustainable Solutions</b>: In recent decades, CAZRI has integrated modern technologies and methods, such as <b>GIS mapping, remote sensing</b>, and <b>climate modeling</b>, to understand the dynamics of arid regions more accurately. Its focus has shifted to more comprehensive approaches, including the impacts of <b>climate change</b>, resource optimization, and sustainable agricultural practices.</li>
-                    <li><b>Outreach</b>: CAZRI has emphasized technology transfer and outreach programs to directly benefit farmers, introducing improved crop varieties, water-saving irrigation methods, and new ways to manage livestock in arid environments.</li>
-                    <li><b>Regional Impact</b>: Today, CAZRI plays a crucial role not just in Rajasthan but across India's arid and semi-arid zones, helping improve agricultural productivity, desert land reclamation, and promoting sustainable resource use.</li>
-                  </ol>
-                </p>
-                
-                <p>The Central Arid Zone Research Institute (CAZRI) works through a multidisciplinary approach to address the complex challenges of arid and semi-arid regions. Its functioning integrates research, technology development, and community outreach with the goal of sustainable management of natural resources and improving the livelihoods of people living in desert areas. Here's how CAZRI operates:</p>
-                
-                <h3>1. Research and Development</h3>
-                <p>
-                  <ul>
-                    <li>Core Areas: CAZRI conducts research in fields such as soil and water management, desert ecology, climate change, arid agriculture, and animal husbandry. This research is tailored to understand and solve the unique problems of arid regions, including water scarcity, drought, and land degradation.</li>
-                    <li>Multidisciplinary Approach: The institute has several divisions focused on different aspects of arid zone management, such as:
-                    <ul>
-                      <li>Natural Resource Management: Researching soil health, water conservation, and sustainable land use.</li>
-                      <li>Agronomy and Plant Breeding: Developing drought-resistant crops, improving cropping systems, and optimizing agricultural practices.</li>
-                      <li>Livestock Management: Studying the adaptation of livestock to arid conditions and developing better feed and management systems.</li>
-                      </ul>
-                    </li>
-                  </ul>
-                </p>
-                
-                <h3>2. Technology Development</h3>
-                <p>
-                  Innovative Solutions: CAZRI develops technologies suited to arid and semi-arid environments, such as:
-                  <ul>
-                    <li>Water Harvesting: Techniques for conserving and harvesting rainwater, including the use of taankas (underground water storage tanks) and khadins (traditional water harvesting systems).</li>
-                    <li>Drought-Resistant Crop Varieties: Research on crops that can thrive with minimal water, such as certain varieties of millets, pulses, and grasses for fodder.</li>
-                    <li>Soil Conservation Techniques: Methods to prevent soil erosion and degradation, including shelterbelt planting, contour farming, and mulching techniques.</li>
-                    <li>Renewable Energy: Promoting solar and wind energy solutions to reduce reliance on conventional energy in rural, arid areas.</li>
-                    </ul>
-                </p>
-                
-                <h3>3. Sustainable Agriculture and Livelihoods</h3>
-                <p>
-                  Farmer-Centric Initiatives: CAZRI focuses on improving the livelihood of farmers in arid regions by promoting practices that enhance productivity and sustainability, such as:
-                  <ul>
-                    <li>Dryland Farming: Research on maximizing crop production with minimal water through efficient irrigation techniques (e.g., drip irrigation).</li>
-                    <li>Agroforestry: Introducing trees and shrubs into farmland to provide fodder, fuelwood, and timber while improving the microclimate and reducing soil erosion.</li>
-                    <li>Animal Husbandry: Developing better ways to manage livestock in these regions, such as improved breeds of sheep, goats, and camels that are adapted to arid conditions.</li>
-                  </ul>
-                </p>
-                
-                <h3>4. Natural Resource Management</h3>
-                <p>
-                  <ul>
-                    <li><b>Desertification Control</b>: CAZRI conducts research on combating desertification by studying vegetation, soil moisture, and the impact of human activities on desert landscapes.</li>
-                    <li><b>Watershed Management</b>: Developing and promoting watershed-based models for the conservation and management of scarce water resources in the desert.</li>
-                    <li><b>Ecosystem Restoration</b>: Techniques like afforestation, planting shelterbelts, and stabilizing sand dunes are used to reclaim degraded land and restore the arid ecosystem.</li>
-                  </ul>
-                </p>
-                
-                <h3>5. Climate Change and Environmental Studies</h3>
-                <p>
-                  <ul>
-                    <li>Impact Assessment: CAZRI studies the effects of climate change on arid ecosystems, agriculture, and rural livelihoods. This involves monitoring temperature changes, rainfall patterns, and their impact on biodiversity and farming.</li>
-                    <li>Adaptation Strategies: Based on research, CAZRI advises farmers and communities on strategies to adapt to changing climatic conditions, such as altering cropping patterns, using drought-tolerant species, and practicing efficient water usage.</li>
-                  </ul>
-                </p>
-              
-              <p>
-                <a class="button button-fill button-round button-large card-close">Close</a>
-              </p>
-            </div>
+          <div data-swiper-parallax="-200" class="swiper-slide-subtitle text-color-white badge bg-color-blue">
+            The Blue City
           </div>
-        </div>
-        
+          <div data-swiper-parallax="-100" class="swiper-slide-text bg-color-blue text-color-white">
+            <p>
+              Jodhana (officially called Jodhpur) is a cultural city located in the western part of India, in the center of Rajasthan. It is known for ancient temples, beautiful forts and palaces, havells and even houses that are built in vivid shades of blue.
+            </p>
+          </div>
+        </swiper-slide>
+        <swiper-slide class="text-color-black">
+          <div data-swiper-parallax="-300" class="swiper-slide-title time">
+            
+          </div>
+          <div data-swiper-parallax="-200" class="swiper-slide-subtitle date">
+            
+          </div>
+        </swiper-slide>
+        <swiper-slide class="text-color-black">
+          <div data-swiper-parallax="-300" class="swiper-slide-title">
+            Slide 3
+          </div>
+          <div data-swiper-parallax="-200" class="swiper-slide-subtitle">
+            Subtitle
+          </div>
+          <div data-swiper-parallax="-100" class="swiper-slide-text">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus
+              felis iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo. Integer
+              laoreet magna nec elit suscipit, ac laoreet nibh euismod. Aliquam hendrerit lorem at elit facilisis
+              rutrum. Ut at ullamcorper velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut libero. Aenean
+              feugiat non eros quis feugiat.
+            </p>
+          </div>
+        </swiper-slide>
+      </swiper-container>
     </div>
-    </div>
-</div>
+  </div>
 </template>
 <script>
-export default function (props, ctx) {
-return $render;
-};
-</script>
+  export default function (props, $f7, $onMounted, ctx) {
+    
+    const time = () => {
+      const t = new Date();
+      const te = t.toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
+      $('.time').text(te);
+      date();
+      setTimeout(time, (60-t.getSeconds())*1000||1000);
+    };
+    
+    const date = () => {
+      const d = new Date();
+      const de = d.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+      $('.date').text(de);
+      
+      //var nD = new Date(d);
+      //nD.setDate(d.getDate() + 1);
+      //nD.setHours(0, 0, 0);
+      //console.log(d.getDate(), d.getTime(), nD.getDate(), nD.getTime(), nD.getTime() - d.getTime());
+      
+      //setTimeout(date, (nD.getTime() - d.getTime())||1000);
+    };
+    
+    
+    app.on('tabInit', () => {
+      time();
+    });
+    
+    
+    return $render;
+  };
+  </script>

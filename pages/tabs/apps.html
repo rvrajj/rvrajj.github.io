@@ -1,3 +1,4 @@
+<template>
 <div class="page">
   <div class="page-content">
     <div class="block-title block-title-large">
@@ -5,85 +6,55 @@
     </div>
     <div class="apps-table-list apps-table-list-scrollable list list-dividers no-chevron">
       <ul>
-        <li><a class="item-link" href="/apps/calendar/"><div class="item-content">
+        ${apps.length > 0 && apps.map((app) => $h`
+        <li><a class="item-link" href="${app.link}"><div class="item-content">
           <div class="item-media">
-            <i class="icon f7-icons" style="font-size:60px">calendar</i>
+            <i class="icon f7-icons" style="font-size:60px">${app.icon}</i>
           </div>
           <div class="item-inner">
             <div class="item-title">
               <div class="apps-table-list-title" slot="title">
-                Calendar
+                ${app.title}
               </div>
               <div class="apps-table-list-subtitle item-text" slot="title">
-                Track your events
+              ${app.subtitle}
               </div>
             </div>
             <div class="apps-table-list-button" slot="inner">
-              <button class="prevent-active-state-propagation button button-round" type="button">Open</button>
+              <button class="prevent-active-state-propagation button button-round" type="button">${app.button}</button>
+              ${app.purchase && $h`
+              <span>In-App Purchases</span>
+              `}
             </div>
           </div>
         </div>
         </a></li>
-        <li><a class="item-link" href="/apps/gallery/"><div class="item-content">
-          <div class="item-media">
-            <i class="icon f7-icons" style="font-size:60px">photo_on_rectangle</i>
-          </div>
-          <div class="item-inner">
-            <div class="item-title">
-              <div class="apps-table-list-title" slot="title">
-                Gallery
-              </div>
-              <div class="apps-table-list-subtitle item-text" slot="title">
-                Some images
-              </div>
-            </div>
-            <div class="apps-table-list-button" slot="inner">
-              <button class="prevent-active-state-propagation button button-round" type="button">Open</button>
-            </div>
-          </div>
-        </div>
-        </a></li>
-        <li><a class="item-link" href="/apps/busroutes/"><div class="item-content">
-          <div class="item-media">
-            <i class="icon f7-icons" style="font-size:60px">tram_fill</i>
-          </div>
-          <div class="item-inner">
-            <div class="item-title">
-              <div class="apps-table-list-title" slot="title">
-                Bus Routes
-              </div>
-              <div class="apps-table-list-subtitle item-text" slot="title">
-                Travelling through city
-              </div>
-            </div>
-            <div class="apps-table-list-button" slot="inner">
-              <button class="prevent-active-state-propagation button button-round" type="button">Open</button>
-            </div>
-          </div>
-        </div>
-        </a></li>
-        <li><a class="item-link" href="/apps/cars/"><div class="item-content">
-          <div class="item-media">
-            <i class="icon f7-icons" style="font-size:60px">car_fill</i>
-          </div>
-          <div class="item-inner">
-            <div class="item-title">
-              <div class="apps-table-list-title" slot="title">
-                Cars
-              </div>
-              <div class="apps-table-list-subtitle item-text" slot="title">
-                Which is your favorite?
-              </div>
-            </div>
-            <div class="apps-table-list-button" slot="inner">
-              <button class="prevent-active-state-propagation button button-round" type="button">Open</button>
-            </div>
-          </div>
-        </div>
-        </a></li>
+        `)}
         
       </ul>
     </div>
 
   </div>
 </div>
+</template>
+<script>
+  export default (props, { $f7, $, $el, $update, $on }) => {
+    
+    const apps = [
+      {"title" : "Quiz", "subtitle": "Answer the MCQs!", "link": "/apps/quiz/", "icon": "question_circle", "button": "Open", "purchase": false},
+      /*{"title" : "Calendar", "subtitle": "Track your events", "link": "/apps/calendar/", "icon": "calendar", "button": "Open", "purchase": false},*/
+      {"title" : "Programs", "subtitle": "Hello World!", "link": "/apps/programs/", "icon": "number", "button": "Open", "purchase": false},
+      {"title" : "Gallery", "subtitle": "Some images of Jodhpur", "link": "/apps/gallery/", "icon": "photo_on_rectangle", "button": "Open", "purchase": false},
+      {"title" : "E-Books", "subtitle": "Books from various authors", "link": "/apps/ebooks/", "icon": "book", "button": "Open", "purchase": false},
+      {"title" : "Bus Routes", "subtitle": "Travelling through the city", "link": "/apps/busroutes/", "icon": "tram_fill", "button": "Open", "purchase": false},
+      {"title" : "Cars", "subtitle": "Which is your favorite?", "link": "/apps/cars/", "icon": "car_fill", "button": "Open", "purchase": false},
+      {"title" : "Cultural Texts", "subtitle": "हमारी संस्कृति, हमारी पहचान", "link": "/apps/cultural-texts/", "icon": "book_circle_fill", "button": "Open", "purchase": false},
+      {"title" : "Request a new app", "subtitle": "You have an idea", "link": "/apps/request/", "icon": "lightbulb", "button": "Open", "purchase": true},
+      
+    ];
+
+
+
+    return $render;
+  };
+</script>
