@@ -390,7 +390,7 @@
 }
 .demo-swiper-parallax .swiper-slide-title {
   font-size: 41px;
-  font-weight: 300;
+  font-weight: 500;
 }
 .demo-swiper-parallax .swiper-slide-subtitle {
   font-size: 21px;
@@ -684,4 +684,8 @@ code {
   .dark #calendar-events {
     border-left-color: #282828;
   }
+}
+
+.block img {
+  max-width:100%;
 }
