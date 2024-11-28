@@ -1,16 +1,17 @@
 <template>
   <div class="page">
-    <div class="navbar">
+    <div class="navbar navbar-large navbar-transparent">
       <div class="navbar-bg"></div>
       <div class="navbar-inner sliding">
         <div class="left">
           <a class="link back">
             <i class="icon icon-back"></i>
-            <span class="if-not-md">Back</span>
+            <span class="if-not-md">Settings</span>
           </a>
         </div>
-        <div class="title">
-          Theme
+        <div class="title">Theme</div>
+        <div class="title-large">
+          <div class="title-large-text">Theme</div>
         </div>
       </div>
     </div>
@@ -69,6 +70,7 @@
     $f7, $h, $on, $el, $update
   }) => {
     let colors = {
+      azure: 'Azure',
       red: 'Red',
       green: 'Green',
       blue: 'Blue',
